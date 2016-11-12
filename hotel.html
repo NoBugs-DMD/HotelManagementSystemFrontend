@@ -1,23 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="en" ng-app="hotelPage">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <title>NoBugs Hotel Search</title>
+    
+    <title>NoBugs Hotel Search Results</title>
 
     <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css" rel="stylesheet">
     <link href="bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <link href="bower_components/jquery-ui/themes/base/jquery-ui.min.css" rel="stylesheet">
     <link href="bower_components/social/bootstrap-social.css" rel="stylesheet">
-    <link href="bower_components/mystylesIndex.css" rel="stylesheet">
-
+    <link href="bower_components/mystylesHotel.css" rel="stylesheet">
 </head>
 
 <body>
+    
     <!-- navigation bar -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container-fluid">
@@ -32,7 +31,7 @@
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li id="home"><a href="index.html">NoBugs Hotel Search</a></li>
-                </ul> 
+                </ul>  
                 <ul class="nav navbar-right">
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"
@@ -117,52 +116,85 @@
                  </div>
             </div>
         </div>
-        <!-- Login modal ends -->
+    <!-- Login modal ends -->
 
-        <!-- Search form -->
-        <div class="container fullscreen">
-            <div class="row row-content form-row">
-                <form role="form" style="padding-top: 20px">
-                    <div class="form-group col-sm-4">
-                        <label for="city">CITY</label>
-                        <input type="text" class="form-control" id="city" placeholder="Destination City">
-                    </div>
-                    <div class="form-group col-sm-3">
-                            <label for="fromDate">CHECK IN</label>
-                            <div class="has-feedback">
-                            <input type="text" class="form-control" id="arrivalDate" name="date" aria-describedby="date" placeholder="Check In"><span class="glyphicon glyphicon-calendar form-control-feedback" aria-hidden="true"></span>
-                            <span id="date" class="sr-only">date-field</span>
-                            </div>
-                    </div>
-                    <div class="form-group col-sm-3">
-                        <label for="untilDate">CHECK OUT</label>
-                        <div class="has-feedback">
-                            <input type="text" class="form-control" id="departureDate" name="date" aria-describedby="date" placeholder="Check Out"><span class="glyphicon glyphicon-calendar form-control-feedback" aria-hidden="true"></span>
-                            <span id="date" class="sr-only">date-field</span>
-                        </div>
-                    </div>
-                    <div class="form-group col-sm-2" style="padding-top:25px">
-                        <a href="searchResults.html" type="submit" class="btn btn-danger" id="search"><span class="glyphicon glyphicon-search"></span></a>
-                    </div>
-                </form>
-            </div>
-            <!-- end of Search Form-->
-            <!-- random city search-->
-            <div class="row row-content">
-                <div class="col-sm-12 col-sm-push-3">
-                    <a href="#"><h3>Not sure where to go?</h3></a>
+    <!-- main container starts -->
+    <div class="container-fluid" style="padding-top: 40px" >
+        <div class="row" ng-controller="hotelCtrl">
+            <h2>{{hotelCtrl.hotel.name}}</h2>
+        </div>
+    <!-- Form -->
+        <div class="row">
+        <form role="form" style="padding-top: 20px">
+            <div class="form-group col-sm-3">
+                <label for="fromDate">CHECK IN</label>
+                <div class="has-feedback">
+                    <input type="text" class="form-control" id="arrivalDate" name="date" aria-describedby="date" placeholder="Check In"><span class="glyphicon glyphicon-calendar form-control-feedback" aria-hidden="true"></span>
+                    <span id="date" class="sr-only">date-field</span>
                 </div>
             </div>
-            <!-- end of random city search-->
+            <div class="form-group col-sm-3">
+                <label for="untilDate">CHECK OUT</label>
+                <div class="has-feedback">
+                    <input type="text" class="form-control" id="departureDate" name="date" aria-describedby="date" placeholder="Check Out"><span class="glyphicon glyphicon-calendar form-control-feedback" aria-hidden="true"></span>
+                    <span id="date" class="sr-only">date-field</span>
+                </div>
+            </div>
+            <div class="form-group col-sm-2" style="padding-top:25px">
+                <button type="submit" class="btn btn-danger" id="search"><span class="glyphicon glyphicon-search"></span></button>
+            </div>
+        </form> 
+        </div> <!-- End of Form -->
+    </div> <!-- main container ends -->
+    
+
+    <!-- footer starts-->
+    <footer class="row-footer">
+        <div class="container-fluid">
+            <div class="row">             
+                <div class="col-xs-5 col-xs-offset-1 col-sm-2 col-sm-offset-1">
+                    <h5>Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="clientprofile.html">My Profile</a></li>
+                        <li><a href="clientprofile.html">My Bookings</a></li>
+                    </ul>
+                </div>
+                <div class="col-xs-6 col-sm-5">
+                    <h5>Our Address</h5>
+                    <address>
+                      1, Universitetskaya str.<br>
+                      Innopolis<br>
+                      RUSSIA<br>
+                      <i class="fa fa-phone"></i>: +79151234567<br>
+                        <i class="fa fa-envelope"></i>: 
+                                 <a href="mailto:nobugs@gmail.com">nobugs@gmail.com</a>
+                   </address>
+                </div>
+                <div class="col-xs-12 col-sm-4">
+                    <div class="nav navbar-nav" style="padding: 40px 10px;">
+                        <a class="btn btn-social-icon btn-google-plus" href="http://google.com/+"><i class="fa fa-google-plus"></i></a>
+                        <a class="btn btn-social-icon btn-facebook" href="http://www.facebook.com/profile.php?id="><i class="fa fa-facebook"></i></a>
+                        <a class="btn btn-social-icon btn-twitter" href="http://twitter.com/"><i class="fa fa-twitter"></i></a>
+                        <a class="btn btn-social-icon btn-vk" href="http://vk.com"><i class="fa fa-vk"></i></a>
+                    </div>
+                </div>
+                <div class="col-xs-12">
+                    <p style="padding:10px;"></p>
+                    <p align=center>© Copyright 2016 NoBugs DMD Team</p>
+                </div>
+            </div>
         </div>
-       
-
-
+    </footer>
+    <!-- footer ends-->
+        
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
     <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="bower_components/jquery-ui/jquery-ui.min.js"></script>
+    <script src="bower_components/angular/angular.min.js"></script>
 
 
+    <!-- loading modals -->
     <script>
         $(document).ready(function(){
             $("#loginLink").click(function(){
@@ -170,16 +202,29 @@
             });
         });
     </script>
-    <script type="text/javascript">
+    
+    <!-- date pickers -->
+    <script>
         $(function () {
                 $('#arrivalDate').datepicker();
                 $('#departureDate').datepicker();
         });
     </script>
-
-    
-    
+    <script>
+        var app = angular.module('hotelPage', []);
+        app.controller = ('hotelCtrl', function() {
+            var hotel = {
+                name: 'Hotel Sweet Hotel',
+                image: 'bower_components/img/car.jpg',
+                rating: '8.3',
+                price: '2329',
+                stars: 9
+            }
+            this.hotel = hotel;
+        });
+    </script>
 
 
 </body>
+
 </html>
