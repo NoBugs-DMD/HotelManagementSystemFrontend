@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="searchResults">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -29,7 +29,10 @@
                     <span class="icon-bar"></span>
                 </button>
             </div>
-            <div id="navbar" class="navbar-collapse collapse"> 
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li id="home"><a href="index.html">NoBugs Hotel Search</a></li>
+                </ul>  
                 <ul class="nav navbar-right">
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"
@@ -116,8 +119,9 @@
         </div>
         <!-- Login modal ends -->
 
-        <!-- Form -->
+        <!-- main container starts -->
         <div class="container-fluid" style="padding-top: 40px">
+        <!-- Form -->
         <form role="form" style="padding-top: 20px">
             <div class="form-group col-sm-4">
                 <label for="city">CITY</label>
@@ -142,26 +146,83 @@
             </div>
         </form>
         <!-- End of Form -->
+        
         <!-- Sorting starts -->
         <div class="row row-content">
-            <p id="sortedP"> Sort by: <a href="#price">price</a>, <a href="#rating">rating</a>, <a href="#stars">stars</a></p>
+            <p id="sortedP"> Sort by: <a href="#price">price</a> &nbsp; <a href="#rating">rating</a> &nbsp; <a href="#stars">stars</a></p>
         </div>
         <!-- Sorting ends -->
 
         <!-- Search results -->
-
-        
-        <!-- Search results end -->
-
-        
-
-
+        <div class="row" ng-controller="PaginationCtrl">
+               <ul class="media-list">
+                <li class="col-sm-4 media" ng-repeat="hotel in pagedHotels">
+                    <div class="media-left media-middle">
+                        <a href="#">
+                        <img class="media-object img-thumbnail" style="width:150px;height:150px"
+                         ng-src={{hotel.image}}>
+                        </a>
+                    </div>
+                    <div class="media-body">
+                        <h2 class="media-heading"><a href="hotelpage.html">{{hotel.name}}</a></h2>
+                        <h4><span class="label label-warning">{{hotel.stars}}</span>
+                        <span class="badge">{{hotel.rating}}</span></h4>
+                        <p style="font-size: 18px">From {{hotel.price}}RUB</p>
+                        <a href="#" class="btn btn-danger">Book</a>
+                    </div>
+                </li>
+                <div class="col-sm-4 col-sm-push-5"><button class="btn btn-info" href="#" ng-class="nextPageDisabledClass()" ng-click="loadMore()" id="getMoreBtn">Get More Hotels</button></div>
+                </ul>
+        </div> <!-- Search results end -->
+    </div> <!-- main container ends -->
+    
+    <!-- footer starts-->
+    <footer class="row-footer">
+        <div class="container-fluid">
+            <div class="row">             
+                <div class="col-xs-5 col-xs-offset-1 col-sm-2 col-sm-offset-1">
+                    <h5>Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">My Bookings</a></li>
+                        <li><a href="#">My Profile</a></li>
+                    </ul>
+                </div>
+                <div class="col-xs-6 col-sm-5">
+                    <h5>Our Address</h5>
+                    <address>
+                      1, Universitetskaya str.<br>
+                      Innopolis<br>
+                      RUSSIA<br>
+                      <i class="fa fa-phone"></i>: +79151234567<br>
+                        <i class="fa fa-envelope"></i>: 
+                                 <a href="mailto:nobugs@gmail.com">nobugs@gmail.com</a>
+                   </address>
+                </div>
+                <div class="col-xs-12 col-sm-4">
+                    <div class="nav navbar-nav" style="padding: 40px 10px;">
+                        <a class="btn btn-social-icon btn-google-plus" href="http://google.com/+"><i class="fa fa-google-plus"></i></a>
+                        <a class="btn btn-social-icon btn-facebook" href="http://www.facebook.com/profile.php?id="><i class="fa fa-facebook"></i></a>
+                        <a class="btn btn-social-icon btn-twitter" href="http://twitter.com/"><i class="fa fa-twitter"></i></a>
+                        <a class="btn btn-social-icon btn-vk" href="http://vk.com"><i class="fa fa-vk"></i></a>
+                    </div>
+                </div>
+                <div class="col-xs-12">
+                    <p style="padding:10px;"></p>
+                    <p align=center>© Copyright 2016 NoBugs DMD Team</p>
+                </div>
+            </div>
         </div>
+    </footer>
+    <!-- footer ends-->
         
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
     <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="bower_components/jquery-ui/jquery-ui.min.js"></script>
+    <script src="bower_components/angular/angular.min.js"></script>
 
+
+    <!-- loading modals -->
     <script>
         $(document).ready(function(){
             $("#loginLink").click(function(){
@@ -169,6 +230,184 @@
             });
         });
     </script>
+    
+    <!-- date pickers -->
+    <script type="text/javascript">
+        $(function () {
+                $('#arrivalDate').datepicker();
+                $('#departureDate').datepicker();
+        });
+    </script>
+    
+    <!-- search results controller -->
+    <script>
+        var app = angular.module('searchResults', []);
+        //creating hotel info
+        app.factory('Hotel', function() {
+            var hotels = [
+            {
+                name: 'Marijuana Legal',
+                image: 'bower_components/img/pier.jpg',
+                rating: '8.5',
+                price: '4349',
+                stars: 3
+            },
+            {
+                name: 'Hotel Sweet Hotel',
+                image: 'bower_components/img/car.jpg',
+                rating: '8.3',
+                price: '2329',
+                stars: 9
+            },
+            {
+                name: 'Our Own Hotel',
+                image: 'bower_components/img/glassHat.jpg',
+                rating: '8.0',
+                price: '1389',
+                stars: 2
+            },
+            {
+                name: 'Blackjack and Sluts',
+                image: 'bower_components/img/slippers.jpg',
+                rating: '8.5',
+                price: '4349',
+                stars: 4
+            },
+            {
+                name: 'Not The Best Hotel',
+                image: 'bower_components/img/slipperCoconut.jpg',
+                rating: '8.3',
+                price: '2329',
+                stars: 6
+            },
+            {
+                name: 'We Could Be Better',
+                image: 'bower_components/img/oceanPier.jpg',
+                rating: '8.0',
+                price: '1389',
+                stars: 5
+            },
+            {
+                name: 'Blackjack and Sluts',
+                image: 'bower_components/img/hammock.jpg',
+                rating: '8.5',
+                price: '4349',
+                stars: 4
+            },
+            {
+                name: 'Not The Best Hotel',
+                image: 'bower_components/img/maldives.jpg',
+                rating: '8.3',
+                price: '2329',
+                stars: 6
+            },
+            {
+                name: 'We Could Be Better',
+                image: 'bower_components/img/pretty.jpg',
+                rating: '8.0',
+                price: '1389',
+                stars: 5
+            },
+                            {
+                name: 'Marijuana Legal',
+                image: 'bower_components/img/pier.jpg',
+                rating: '8.5',
+                price: '4349',
+                stars: 3
+            },
+            {
+                name: 'Hotel Sweet Hotel',
+                image: 'bower_components/img/car.jpg',
+                rating: '8.3',
+                price: '2329',
+                stars: 9
+            },
+            {
+                name: 'Our Own Hotel',
+                image: 'bower_components/img/glassHat.jpg',
+                rating: '8.0',
+                price: '1389',
+                stars: 2
+            },
+            {
+                name: 'Blackjack and Sluts',
+                image: 'bower_components/img/slippers.jpg',
+                rating: '8.5',
+                price: '4349',
+                stars: 4
+            },
+            {
+                name: 'Not The Best Hotel',
+                image: 'bower_components/img/slipperCoconut.jpg',
+                rating: '8.3',
+                price: '2329',
+                stars: 6
+            },
+            {
+                name: 'We Could Be Better',
+                image: 'bower_components/img/oceanPier.jpg',
+                rating: '8.0',
+                price: '1389',
+                stars: 5
+            },
+            {
+                name: 'Blackjack and Sluts',
+                image: 'bower_components/img/hammock.jpg',
+                rating: '8.5',
+                price: '4349',
+                stars: 4
+            },
+            {
+                name: 'Not The Best Hotel',
+                image: 'bower_components/img/maldives.jpg',
+                rating: '8.3',
+                price: '2329',
+                stars: 6
+            },
+            {
+                name: 'We Could Be Better',
+                image: 'bower_components/img/pretty.jpg',
+                rating: '8.0',
+                price: '1389',
+                stars: 5
+            }
+            ];
 
+            return {
+                get: function(offset, limit) {
+                    return hotels.slice(offset, offset+limit);
+                },
+                total: function() {
+                    return hotels.length;
+                }
+            };
+        });
+
+        app.controller("PaginationCtrl", function($scope, Hotel) {
+            $scope.itemsPerPage = 9;
+            $scope.currentPage = 0;
+            $scope.total = Hotel.total();
+            $scope.pagedHotels = Hotel.get($scope.currentPage * $scope.itemsPerPage, $scope.itemsPerPage);
+            
+            $scope.loadMore = function() {
+            $scope.currentPage++;
+            var newHotels = Hotel.get($scope.currentPage*$scope.itemsPerPage,$scope.itemsPerPage);
+            $scope.pagedHotels = $scope.pagedHotels.concat(newHotels);
+            };
+
+            $scope.nextPageDisabledClass = function() {
+            return $scope.currentPage === $scope.pageCount()-1 ? "disabled" : "";
+            };
+
+            $scope.pageCount = function() {
+            return Math.ceil($scope.total/$scope.itemsPerPage);
+            };
+        });
+
+    </script>
+    
+    <script>
+
+    </script>
 </body>
 </html>

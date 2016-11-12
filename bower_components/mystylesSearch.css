@@ -50,8 +50,32 @@ input[type=login]:focus {
     border: 2px solid;
     border-color: #B0B0B0;
 }
+/*for navbar left home*/
+#home {
+  font-family: cursive;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 500;
+  text-align: center;
+  font-size: 18px;
+}
 
 #sortedP {
   text-align: center;
   font-size: 22px;
+}
+
+.row-footer {
+  margin: 0px auto;
+  padding: 20px 0px;
+  background-color: #AfAfAf;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  z-index: 10;
+}
+
+#getMoreBtn {
+  margin-top: 20px;
+  margin-bottom: 20px;
 }

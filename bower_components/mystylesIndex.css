@@ -15,7 +15,7 @@
   color: #B0B0B0;
 }
 .navbar-inverse .navbar-nav > .open > a:hover {
-  background: #1a237e;
+  background: #B0B0B0;
   color: #B0B0B0;
 }
 .navbar-inverse .navbar-nav > .open > a:focus {
@@ -27,7 +27,7 @@
   color: #eeeeee;
 }
 .navbar-inverse .navbar-nav .open .dropdown-menu > li > a:hover {
-  color: #000000;
+  color: #B0B0B0;
 }
 .navbar-inverse .navbar-nav .open .dropdown-menu {
   background-color: #303f9f;
@@ -49,6 +49,15 @@ input[type=name]:focus {
 input[type=login]:focus {
     border: 2px solid;
     border-color: #B0B0B0;
+}
+
+#home {
+  font-family: cursive;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 500;
+  text-align: center;
+  font-size: 18px;
 }
 
 .fullscreen {
@@ -75,3 +84,5 @@ h3 {
   text-align: center;
   color: #252628;
 }
+
+
