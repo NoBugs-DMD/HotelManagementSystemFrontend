@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="searchResults">
+<html lang="en" ng-app="hotelApp">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -120,7 +120,7 @@
         <!-- Login modal ends -->
 
         <!-- main container starts -->
-        <div class="container-fluid" style="padding-top: 40px">
+        <div class="container-fluid" style="padding-top: 40px" ng-controller="PaginationCtrl">
         <!-- Form -->
         <form role="form" style="padding-top: 20px">
             <div class="form-group col-sm-4">
@@ -154,7 +154,7 @@
         <!-- Sorting ends -->
 
         <!-- Search results -->
-        <div class="row" ng-controller="PaginationCtrl">
+        <div class="row">
                <ul class="media-list">
                 <li class="col-sm-4 media" ng-repeat="hotel in pagedHotels">
                     <div class="media-left media-middle">
@@ -220,6 +220,7 @@
     <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="bower_components/jquery-ui/jquery-ui.min.js"></script>
     <script src="bower_components/angular/angular.min.js"></script>
+    <script src="app.js"></script>
 
 
     <!-- loading modals -->
@@ -239,175 +240,5 @@
         });
     </script>
     
-    <!-- search results controller -->
-    <script>
-        var app = angular.module('searchResults', []);
-        //creating hotel info
-        app.factory('Hotel', function() {
-            var hotels = [
-            {
-                name: 'Marijuana Legal',
-                image: 'bower_components/img/pier.jpg',
-                rating: '8.5',
-                price: '4349',
-                stars: 3
-            },
-            {
-                name: 'Hotel Sweet Hotel',
-                image: 'bower_components/img/car.jpg',
-                rating: '8.3',
-                price: '2329',
-                stars: 9
-            },
-            {
-                name: 'Our Own Hotel',
-                image: 'bower_components/img/glassHat.jpg',
-                rating: '8.0',
-                price: '1389',
-                stars: 2
-            },
-            {
-                name: 'Blackjack and Sluts',
-                image: 'bower_components/img/slippers.jpg',
-                rating: '8.5',
-                price: '4349',
-                stars: 4
-            },
-            {
-                name: 'Not The Best Hotel',
-                image: 'bower_components/img/slipperCoconut.jpg',
-                rating: '8.3',
-                price: '2329',
-                stars: 6
-            },
-            {
-                name: 'We Could Be Better',
-                image: 'bower_components/img/oceanPier.jpg',
-                rating: '8.0',
-                price: '1389',
-                stars: 5
-            },
-            {
-                name: 'Blackjack and Sluts',
-                image: 'bower_components/img/hammock.jpg',
-                rating: '8.5',
-                price: '4349',
-                stars: 4
-            },
-            {
-                name: 'Not The Best Hotel',
-                image: 'bower_components/img/maldives.jpg',
-                rating: '8.3',
-                price: '2329',
-                stars: 6
-            },
-            {
-                name: 'We Could Be Better',
-                image: 'bower_components/img/pretty.jpg',
-                rating: '8.0',
-                price: '1389',
-                stars: 5
-            },
-            {
-                name: 'Marijuana Legal',
-                image: 'bower_components/img/pier.jpg',
-                rating: '8.5',
-                price: '4349',
-                stars: 3
-            },
-            {
-                name: 'Hotel Sweet Hotel',
-                image: 'bower_components/img/car.jpg',
-                rating: '8.3',
-                price: '2329',
-                stars: 9
-            },
-            {
-                name: 'Our Own Hotel',
-                image: 'bower_components/img/glassHat.jpg',
-                rating: '8.0',
-                price: '1389',
-                stars: 2
-            },
-            {
-                name: 'Blackjack and Sluts',
-                image: 'bower_components/img/slippers.jpg',
-                rating: '8.5',
-                price: '4349',
-                stars: 4
-            },
-            {
-                name: 'Not The Best Hotel',
-                image: 'bower_components/img/slipperCoconut.jpg',
-                rating: '8.3',
-                price: '2329',
-                stars: 6
-            },
-            {
-                name: 'We Could Be Better',
-                image: 'bower_components/img/oceanPier.jpg',
-                rating: '8.0',
-                price: '1389',
-                stars: 5
-            },
-            {
-                name: 'Blackjack and Sluts',
-                image: 'bower_components/img/hammock.jpg',
-                rating: '8.5',
-                price: '4349',
-                stars: 4
-            },
-            {
-                name: 'Not The Best Hotel',
-                image: 'bower_components/img/maldives.jpg',
-                rating: '8.3',
-                price: '2329',
-                stars: 6
-            },
-            {
-                name: 'We Could Be Better',
-                image: 'bower_components/img/pretty.jpg',
-                rating: '8.0',
-                price: '1389',
-                stars: 5
-            }
-            ];
-
-            return {
-                get: function(offset, limit) {
-                    return hotels.slice(offset, offset+limit);
-                },
-                total: function() {
-                    return hotels.length;
-                }
-            };
-        });
-
-        app.controller("PaginationCtrl", function($scope, Hotel) {
-            $scope.itemsPerPage = 9;
-            $scope.currentPage = 0;
-            $scope.total = Hotel.total();
-            $scope.pagedHotels = Hotel.get($scope.currentPage * $scope.itemsPerPage, $scope.itemsPerPage);
-            
-            $scope.loadMore = function() {
-            $scope.currentPage++;
-            var newHotels = Hotel.get($scope.currentPage*$scope.itemsPerPage,$scope.itemsPerPage);
-            $scope.pagedHotels = $scope.pagedHotels.concat(newHotels);
-            };
-
-            $scope.nextPageDisabledClass = function() {
-            return $scope.currentPage === $scope.pageCount()-1 ? "disabled" : "";
-            };
-
-            $scope.pageCount = function() {
-            return Math.ceil($scope.total/$scope.itemsPerPage);
-            };
-        });
-
-    </script>
-    
-    <script>
-
-    </script>
 </body>
 </html>

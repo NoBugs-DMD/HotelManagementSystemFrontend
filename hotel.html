@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="hotelPage">
+<html lang="en" ng-app="hotelApp">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -119,13 +119,19 @@
     <!-- Login modal ends -->
 
     <!-- main container starts -->
-    <div class="container-fluid" style="padding-top: 40px" >
-        <div class="row" ng-controller="hotelCtrl">
-            <h2>{{hotelCtrl.hotel.name}}</h2>
+    <div class="container-fluid" style="padding-top: 40px" ng-controller="hotelCtrl"> 
+        <h2>{{hotelCtrl.name}}<span class="label label-warning">{{hotel.stars}}</span>
+            <a href="reviews.html"><span class="badge">{{hotel.rating}}</span></a></h2>
+            
+            <!-- place for carousel -->
+
+        <div class="row">
+            <p>{{hotelCtrl.description}}</p>
         </div>
     <!-- Form -->
         <div class="row">
         <form role="form" style="padding-top: 20px">
+            <h3>Available Rooms</h3>
             <div class="form-group col-sm-3">
                 <label for="fromDate">CHECK IN</label>
                 <div class="has-feedback">
@@ -145,6 +151,27 @@
             </div>
         </form> 
         </div> <!-- End of Form -->
+
+        <!-- grid of available rooms starts -->
+        <div class="row">
+               <ul class="media-list">
+                <li class="col-sm-4 media" ng-repeat="room in availableRooms">
+                    <div class="media-left media-middle">
+                        <a href="#">
+                        <img class="media-object img-thumbnail" style="width:150px;height:150px"
+                         ng-src={{room.image}}>
+                        </a>
+                    </div>
+                    <div class="media-body">
+                        <h2 class="media-heading">{{room.type}}</h2>
+                        <p style="font-size: 18px">{{room.price}}RUB</p>
+                        <a href="#" class="btn btn-danger">Book</a>
+                    </div>
+                </li>
+                </ul>
+        </div>
+        <!-- grid of available rooms ends -->
+
     </div> <!-- main container ends -->
     
 
@@ -192,6 +219,7 @@
     <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="bower_components/jquery-ui/jquery-ui.min.js"></script>
     <script src="bower_components/angular/angular.min.js"></script>
+    <script src="app.js"></script>
 
 
     <!-- loading modals -->
@@ -210,20 +238,6 @@
                 $('#departureDate').datepicker();
         });
     </script>
-    <script>
-        var app = angular.module('hotelPage', []);
-        app.controller = ('hotelCtrl', function() {
-            var hotel = {
-                name: 'Hotel Sweet Hotel',
-                image: 'bower_components/img/car.jpg',
-                rating: '8.3',
-                price: '2329',
-                stars: 9
-            }
-            this.hotel = hotel;
-        });
-    </script>
-
 
 </body>
 
