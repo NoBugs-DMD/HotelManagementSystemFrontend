@@ -70,6 +70,7 @@ input[type=login]:focus {
   z-index: 10;
 }
 
-.panel-footer > .panel-footer-custom {
-  background: #afe9ed;
+#getMoreBtn {
+  margin-top: 20px;
+  margin-bottom: 20px;
 }

@@ -13,6 +13,12 @@
     <link href="bower_components/jquery-ui/themes/base/jquery-ui.min.css" rel="stylesheet">
     <link href="bower_components/social/bootstrap-social.css" rel="stylesheet">
     <link href="bower_components/mystylesReview.css" rel="stylesheet">
+
+    <style>
+        .label-medium {
+            font-size: 16px;
+        }
+    </style>
 </head>
 
 <body>
@@ -119,32 +125,35 @@
         <!-- Login modal ends -->
 
     <!-- main container starts-->
-    <div class="container-fluid" style="padding-top: 40px" ng-controller="reviewCtrl">
+    <div class="container-fluid" style="padding-top: 40px" ng-controller="PaginationCtrlReviews">
         <h2 style="text-align: center"><a href="hotel.html">Hotel Sweet Hotel</a></h2>
-        <div class="col-sm-12" ng-repeat="review in reviewCtrl">
-            <div class="panel panel-default">
+            <div class="panel panel-default" ng-repeat="review in pagedReviews">
                 <div class="panel-body">
-                    <ul class="list-inline">
-                        <li style="font-weight: bold">Location<span class="badge">{{reviewCtrl.locationRate}}</span></li>
-                        <li style="font-weight: bold">Cleanliness<span class="badge">{{reviewCtrl.cleanlinessRate}}</span></li>
-                        <li style="font-weight: bold">Service<span class="badge">{{reviewCtrl.serviceRate}}</span></li>
-                        <li style="font-weight: bold">Value For Money<span class="badge">{{reviewCtrl.valueForMoneyRate}}</span></li>
-                    </ul>
-                    <dt>
-                        <dl>Review</dl>
-                        <dd>{{reviewCtrl.body}}</dd>
-                    </dt>
+                    <table style="width: 100%">
+                        <tr>
+                            <td style="font-weight: bold">Location <span class="label label-warning label-medium">{{review.locationRate}}</span></td>
+                            <td style="font-weight: bold">Cleanliness <span class="label label-warning label-medium">{{review.cleanlinessRate}}</span></td>
+                            <td style="font-weight: bold">Service <span class="label label-warning label-medium">{{review.serviceRate}}</span></td>
+                            <td style="font-weight: bold">Value For Money <span class="label label-warning label-medium">{{review.valueForMoney}}</span></td>
+                        </tr>
+                        <tr>
+                            <dl>
+                                <dt>Review: </dt>
+                                <dd>{{review.body}}</dd>
+                            </dl>
+                        </tr>
+                    </table>
                 </div>
                 <div class="panel-footer">
                     <table style="width: 100%">
                         <tr>
-                            <td>By {{reviewCtrl.name}}</td>
-                            <td>Overall Rating:<span class="badge">{{reviewCtrl.overallRating}}</span></td>
+                            <td>By {{review.name}}</td>
+                            <td>Overall Rating: <span class="label label-danger label-medium">{{review.overallRating}}</span></td>
                         </tr>
                     </table>
                 </div>
             </div>
-        </div>
+            <div class="col-sm-4 col-sm-push-5"><button class="btn btn-info" href="#" ng-class="nextPageDisabledClass()" ng-click="loadMore()" id="getMoreBtn">Get More Reviews</button></div>
     </div> <!-- main container ends-->
 
     <!-- footer starts-->
