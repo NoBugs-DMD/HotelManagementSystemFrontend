@@ -118,17 +118,28 @@
     <!-- Login modal ends -->
 
     <!-- main container starts -->
-    <div class="container-fluid" style="padding-top: 40px"> 
-        <h2>{{theHotel.name}}<span class="label label-warning">{{theHotel.stars}}</span>
-            <a href="reviews.html"><span class="badge">{{theHotel.rating}}</span></a></h2>
-            
-            <!-- place for carousel -->
-
+    <div class="container-fluid" style="padding-top: 60px"> 
+        <div class="row" ng-controller="CurrentHotelCtrl">
+        <ul class="media-list">
+            <li class="col-sm-12 media">
+                <div class="media-left media-middle">
+                    <a href="#">
+                        <img class="media-object img-thumbnail" style="width:150px;height:150px"
+                         ng-src={{currentHotel.image}}>
+                    </a>
+                </div>
+                <div class="media-body">
+                    <h2 class="media-heading">{{currentHotel.name}} <span class="label label-warning">{{currentHotel.stars}}</span>
+                    <a href="reviews.html"><span class="badge">{{currentHotel.rating}}</span></a></h2>
+                    <p style="font-size: 18px">{{currentHotel.description}}</p>
+                </div>
+            </li>
+        </ul>
+        </div> <!-- hotel info ends -->
+        
+        <!-- available rooms start -->
         <div class="row">
-            <p>{{theHotel.description}}</p>
-        </div>
-    <!-- Form -->
-        <div class="row">
+        <!-- search for other dates starts -->
         <form role="form" style="padding-top: 20px">
             <h3>Available Rooms</h3>
             <div class="form-group col-sm-3">
@@ -149,10 +160,10 @@
                 <button type="submit" class="btn btn-danger" id="search"><span class="glyphicon glyphicon-search"></span></button>
             </div>
         </form> 
-        </div> <!-- End of Form -->
+        </div> <!-- search for other dates ends -->
 
         <!-- grid of available rooms starts -->
-        <div class="row" ng-controller="RoomsController">
+        <div class="row" ng-controller="RoomController">
                <ul class="media-list">
                 <li class="col-sm-4 media" ng-repeat="room in rooms">
                     <div class="media-left media-middle">
@@ -162,9 +173,9 @@
                         </a>
                     </div>
                     <div class="media-body">
-                        <h2 class="media-heading">{{room.level}}</h2>
+                        <h2 class="media-heading">{{room.level | uppercase}}</h2>
                         <p style="font-size: 18px">{{room.price}}RUB</p>
-                        <a href="#" class="btn btn-danger">Book</a>
+                        <a href="makeabooking.html" class="btn btn-danger">Book</a>
                     </div>
                 </li>
                 </ul>
@@ -219,6 +230,8 @@
     <script src="bower_components/jquery-ui/jquery-ui.min.js"></script>
     <script src="bower_components/angular/angular.min.js"></script>
     <script src="app.js"></script>
+    <script src="factories.js"></script>
+    <script src="controllers.js"></script>
 
 
     <!-- loading modals -->

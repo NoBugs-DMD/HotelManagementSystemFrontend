@@ -49,10 +49,13 @@ var app = angular.module('hotelApp');
         app.controller("ReservationCtrl", function ($scope, Reservation) {
             $scope.reservation = Reservation.get();
         });
+
+        app.controller("CurrentHotelCtrl", function ($scope, Onehotel) {
+            $scope.currentHotel = Onehotel.get();
+        });
         
-        app.controller("RoomsController", function($scope, Room) {
+        app.controller("RoomController", function($scope, Room) {
             $scope.rooms = Room.get();
-            console.log(rooms[0]);
         });
 
         app.controller("MyBookingsController", function ($scope, Booking) {

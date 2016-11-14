@@ -133,13 +133,25 @@ var app = angular.module('hotelApp');
             };
         });
 
+        app.factory('Onehotel', function() {
+            var onehotel = { 
+                name: 'Marijuana Legal', image: 'img/pier.jpg', description: "This is the best hotel you will ever try to spend time at. It's fantastic and wonderful, ah! You'll greatly enjoy your time here, we guarantee you!", rating: 8.5, price: 4349, stars: 3
+            };
+
+            return {
+                get: function() {
+                    return onehotel;
+                }
+            };
+        });
+
         app.factory('Room', function() {
             var rooms = [
-            {level: 'economy', price: '890', image: 'img/pier.jpg'},
-            {level: 'suite', price: '8905', image: 'img/pier.jpg'},
-            {level: 'double', price: '5432', image: 'img/pier.jpg'},
-            {level: 'single', price: '1900', image: 'img/pier.jpg'},
-            {level: 'dorms', price: '890', image: 'img/pier.jpg'},
+            {level: 'economy', price: '890', image: 'img/glassHat.jpg'},
+            {level: 'suite', price: '8905', image: 'img/glassHat.jpg'},
+            {level: 'double', price: '5432', image: 'img/glassHat.jpg'},
+            {level: 'single', price: '1900', image: 'img/glassHat.jpg'},
+            {level: 'dorms', price: '890', image: 'img/glassHat.jpg'},
             ];
 
             return {
