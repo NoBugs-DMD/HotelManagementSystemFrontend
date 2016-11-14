@@ -12,7 +12,7 @@
     <link href="bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <link href="bower_components/jquery-ui/themes/base/jquery-ui.min.css" rel="stylesheet">
     <link href="bower_components/social/bootstrap-social.css" rel="stylesheet">
-    <link href="bower_components/mystylesHotel.css" rel="stylesheet">
+    <link href="myStyles.css" rel="stylesheet">
 </head>
 
 <body>
@@ -81,7 +81,6 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default btn-sm"
                        data-dismiss="modal">Cancel</button>
-                        <a href="#">Forgot password?</a> <!-- TODO: forgot password page -->
                     </div>
                     </form>
                     <p></p> <!-- gap between the pill and the content VERY BAD-->
@@ -119,14 +118,14 @@
     <!-- Login modal ends -->
 
     <!-- main container starts -->
-    <div class="container-fluid" style="padding-top: 40px" ng-controller="hotelCtrl"> 
-        <h2>{{hotelCtrl.name}}<span class="label label-warning">{{hotel.stars}}</span>
-            <a href="reviews.html"><span class="badge">{{hotel.rating}}</span></a></h2>
+    <div class="container-fluid" style="padding-top: 40px"> 
+        <h2>{{theHotel.name}}<span class="label label-warning">{{theHotel.stars}}</span>
+            <a href="reviews.html"><span class="badge">{{theHotel.rating}}</span></a></h2>
             
             <!-- place for carousel -->
 
         <div class="row">
-            <p>{{hotelCtrl.description}}</p>
+            <p>{{theHotel.description}}</p>
         </div>
     <!-- Form -->
         <div class="row">
@@ -153,9 +152,9 @@
         </div> <!-- End of Form -->
 
         <!-- grid of available rooms starts -->
-        <div class="row">
+        <div class="row" ng-controller="RoomsController">
                <ul class="media-list">
-                <li class="col-sm-4 media" ng-repeat="room in availableRooms">
+                <li class="col-sm-4 media" ng-repeat="room in rooms">
                     <div class="media-left media-middle">
                         <a href="#">
                         <img class="media-object img-thumbnail" style="width:150px;height:150px"
@@ -163,7 +162,7 @@
                         </a>
                     </div>
                     <div class="media-body">
-                        <h2 class="media-heading">{{room.type}}</h2>
+                        <h2 class="media-heading">{{room.level}}</h2>
                         <p style="font-size: 18px">{{room.price}}RUB</p>
                         <a href="#" class="btn btn-danger">Book</a>
                     </div>
@@ -183,8 +182,8 @@
                     <h5>Links</h5>
                     <ul class="list-unstyled">
                         <li><a href="index.html">Home</a></li>
-                        <li><a href="clientprofile.html">My Profile</a></li>
-                        <li><a href="clientprofile.html">My Bookings</a></li>
+                        <li><a href="mybookings.html">My Profile</a></li>
+                        <li><a href="mybookings.html">My Bookings</a></li>
                     </ul>
                 </div>
                 <div class="col-xs-6 col-sm-5">
