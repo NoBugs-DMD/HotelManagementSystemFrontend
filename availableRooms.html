@@ -1,0 +1,37 @@
+<h3>Available Rooms</h3>
+    <div class="btn-group btn-group-lg" role="group">
+        <a id="checkBookingDetails"><button type="button" class="btn btn-default col-sm-4" ng-repeat="room in rooms">
+            <ul class="media-list">
+                <li class="media">
+                    <div class="media-left media-middle">
+                        <a href="#">
+                        <img class="media-object img-thumbnail" style="width:150px;height:150px" ng-src={{room.image}}>
+                        </a>
+                    </div>
+                    <div class="media-body">
+                        <h2 class="media-heading">{{room.level | uppercase}}</h2>
+                        <p style="font-size: 18px">{{room.price}}RUB</p>
+                    </div>
+                </li>
+            </ul>
+        </button>
+        </a>
+    </div>
+    <div id="bookingDetailsModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4>Check Your Booking Details</h4>
+                </div>
+                <div class="modal-body">
+                    
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default btn-sm"
+                       data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+        
+    </div>

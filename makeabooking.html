@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="hotelApp">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>NoBugs Hotel Search Results</title>
+
+    <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css" rel="stylesheet">
+    <link href="bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="bower_components/jquery-ui/themes/base/jquery-ui.min.css" rel="stylesheet">
+    <link href="bower_components/social/bootstrap-social.css" rel="stylesheet">
+    <link href="myStyles.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- navigation bar -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
+            <div>
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li id="home"><a href="index.html">NoBugs Hotel Search</a></li>
+                </ul>  
+                <ul class="nav navbar-right">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                         role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-menu-hamburger"
+                         aria-hidden="true"></span>
+                         <span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="mybookings.html">My Bookings</a></li>
+                            <li><a href="mybookings.html">My Profile</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a id="loginLink">Login / Sign Up</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Modals for Login & Sign up-->
+            <div id="loginModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+        <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                    <ul class="nav nav-pills nav-justified">
+                        <li class="active"><a data-toggle="pill" href="#loginTab">Login</a></li>
+                        <li><a data-toggle="pill" href="#signupTab">Sign Up</a></li>
+                    </ul>
+                    <p></p> <!-- gap between the pill and the content VERY BAD-->
+                    <div class="tab-content">
+                    <form role="form" id="loginTab" class="tab-pane fade in active">
+                    <div class="form-group">
+                        <label class="sr-only" for="email">Email address</label>
+                        <input type="email" class="form-control" id="email" placeholder="Email">
+                    </div>
+                    <div class="form-group">
+                        <label class="sr-only" for="password">Password</label>
+                        <input type="password" class="form-control" id="password" placeholder="Password">
+                    </div>
+                    <div class="checkbox">
+                        <label id="checkbox"> <input type="checkbox" >Remember me</label> 
+                    </div>        
+                    <button type="submit" class="btn btn-info">Login</button>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default btn-sm"
+                       data-dismiss="modal">Cancel</button>
+                    </div>
+                    </form>
+                    <p></p> <!-- gap between the pill and the content VERY BAD-->
+                    <form role="form" id="signupTab" class="tab-pane fade">
+                    <div class="form-group">
+                        <label class="sr-only" for="name">Login</label>
+                        <input type="login" class="form-control" id="login" placeholder="Login Name">
+                    </div>
+                    <div class="form-group">
+                        <label class="sr-only" for="name">Name</label>
+                        <input type="name" class="form-control" id="name" placeholder="Name">
+                    </div>
+                    <div class="form-group">
+                        <label class="sr-only" for="email">Email address</label>
+                        <input type="email" class="form-control" id="email" placeholder="Email">
+                    </div>
+                    <div class="form-group">
+                        <label class="sr-only" for="password">Password</label>
+                        <input type="password" class="form-control" id="password" placeholder="Password">
+                    </div>
+                    <div class="checkbox">
+                        <label id="checkbox"> <input type="checkbox" >Remember me</label> 
+                    </div>        
+                    <button type="submit" class="btn btn-warning" >Sign Up</button>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default btn-sm"
+                       data-dismiss="modal">Cancel</button>
+                    </div>
+                    </form>
+                    </div>
+                    </div>
+                 </div>
+            </div>
+        </div>
+    <!-- Login modal ends -->
+
+    <!-- main container starts-->
+    <div class="container" style="padding-top: 60px">
+        <div class="row" ng-controller="CurrentHotelCtrl">
+            <h2 style="text-align: center">You're about to make a booking at <a href="hotel.html">{{currentHotel.name}}...</a></h2>
+        <!-- fill in booking info about the guest -->
+        <form role="form" class="form-inline" style="padding-top: 20px">
+        <h4>But first, tell us a little about yourself</h4>
+            <div class="form-group col-sm-3">
+                <label for="name">Name: </label>
+                <input type="text" name="name" placeholder="Full Name" class="form-control">
+            </div>
+            <div class="form-group col-sm-3">
+                <label for="email">Email: </label>
+                <input type="text" name="email" placeholder="Email" class="form-control">
+            </div>
+        </form>
+        <!-- fill in booking info about the guest ends -->
+        </div>
+        
+        <!-- search for other dates starts -->
+        <div class="row" style="padding-top: 40px">
+        <form role="form">
+        <h4>When do you want to check in and check out?</h4>
+            <div class="form-group col-sm-3">
+                <label for="fromDate">CHECK IN</label>
+                <div class="has-feedback">
+                    <input type="text" class="form-control" id="arrivalDate" name="date" aria-describedby="date" placeholder="Check In"><span class="glyphicon glyphicon-calendar form-control-feedback" aria-hidden="true"></span>
+                    <span id="date" class="sr-only">date-field</span>
+                </div>
+            </div>
+            <div class="form-group col-sm-3">
+                <label for="untilDate">CHECK OUT</label>
+                <div class="has-feedback">
+                    <input type="text" class="form-control" id="departureDate" name="date" aria-describedby="date" placeholder="Check Out"><span class="glyphicon glyphicon-calendar form-control-feedback" aria-hidden="true"></span>
+                    <span id="date" class="sr-only">date-field</span>
+                </div>
+            </div>
+            <div class="form-group col-sm-2" style="padding-top:25px">
+                <button type="submit" class="btn btn-danger" id="search"><span class="glyphicon glyphicon-search"></span></button>
+            </div>
+        </form> 
+        </div> <!-- search for other dates ends -->
+        
+    <!-- place for available rooms template -->
+    <div class="row" ng-controller="RoomController">
+        <form role="form">
+            <h3>Choose Your Room</h3>
+            <ul class="media-list">
+                <li class="media col-sm-4" ng-repeat="room in rooms">
+                    <div class="media-left media-middle">
+                        <a href="#">
+                        <img class="media-object img-thumbnail" style="width:150px;height:150px" ng-src={{room.image}}>
+                        </a>
+                    </div>
+                    <div class="media-body">
+                        <h2 class="media-heading">{{room.level | uppercase}}</h2>
+                        <p style="font-size: 18px">{{room.price}}RUB</p>
+                        <a href="#" data-toggle="modal" data-target="#bookingDetailsModal" class="btn btn-danger">Book</a>
+                    </div>
+                </li>
+            </ul>
+        </form>
+        
+    </div>
+    <!-- modal checking booking details -->
+    <div id="bookingDetailsModal" class="modal fade" role="dialog" ng-controller="CurrentHotelCtrl">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4>Check Your Booking Details</h4>
+                </div>
+                <div class="modal-body">
+                    <dl>
+                        <dt>Name:</dt>
+                        <dd><!-- {{from form input.name}}--></dd>
+                        <dt>Email:</dt>
+                        <dd><!-- {{from form input.email}}--></dd>
+                        <dt>Hotel:</dt>
+                        <dd>{{currentHotel.name}}</dd>
+                        <dt>Arrival Date:</dt>
+                        <dd><!-- {{from form input.email}}--></dd>
+                        <dt>Departure Date:</dt>
+                        <dd><!-- {{from form input.email}}--></dd>
+                        <dt>Room:</dt>
+                        <dd>{{room.level | uppercase}}</dd>
+                        <dt>Price:</dt>
+                        <dd>{{room.price}}</dd>
+                    </dl>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success">Submit</button>
+                    <button type="button" class="btn btn-default"
+                       data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div> <!-- end of checking booking details modal -->
+        
+    </div> <!-- main container ends-->
+
+    <!-- footer starts-->
+    <footer class="row-footer">
+        <div class="container-fluid">
+            <div class="row">             
+                <div class="col-xs-5 col-xs-offset-1 col-sm-2 col-sm-offset-1">
+                    <h5>Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="mybookings.html">My Profile</a></li>
+                        <li><a href="mybookings.html">My Bookings</a></li>
+                    </ul>
+                </div>
+                <div class="col-xs-6 col-sm-5">
+                    <h5>Our Address</h5>
+                    <address>
+                      1, Universitetskaya str.<br>
+                      Innopolis<br>
+                      RUSSIA<br>
+                      <i class="fa fa-phone"></i>: +79151234567<br>
+                        <i class="fa fa-envelope"></i>: 
+                                 <a href="mailto:nobugs@gmail.com">nobugs@gmail.com</a>
+                   </address>
+                </div>
+                <div class="col-xs-12 col-sm-4">
+                    <div class="nav navbar-nav" style="padding: 40px 10px;">
+                        <a class="btn btn-social-icon btn-google-plus" href="http://google.com/+"><i class="fa fa-google-plus"></i></a>
+                        <a class="btn btn-social-icon btn-facebook" href="http://www.facebook.com/profile.php?id="><i class="fa fa-facebook"></i></a>
+                        <a class="btn btn-social-icon btn-twitter" href="http://twitter.com/"><i class="fa fa-twitter"></i></a>
+                        <a class="btn btn-social-icon btn-vk" href="http://vk.com"><i class="fa fa-vk"></i></a>
+                    </div>
+                </div>
+                <div class="col-xs-12">
+                    <p style="padding:10px;"></p>
+                    <p align=center>© Copyright 2016 NoBugs DMD Team</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- footer ends-->
+
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="bower_components/jquery-ui/jquery-ui.min.js"></script>
+    <script src="bower_components/angular/angular.min.js"></script>
+    <script src="app.js"></script>
+    <script src="factories.js"></script>
+    <script src="controllers.js"></script>
+
+
+    <!-- loading modals -->
+    <script>
+        $(document).ready(function(){
+            $("#loginLink").click(function(){
+                $("#loginModal").modal();
+            });
+        });
+    </script>
+    <!-- date pickers -->
+    <script>
+        $(function () {
+                $('#arrivalDate').datepicker();
+                $('#departureDate').datepicker();
+        });
+    </script>
+
+
+    </body>
+
+</html>
