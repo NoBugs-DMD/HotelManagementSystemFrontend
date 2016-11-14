@@ -44,7 +44,10 @@ var app = angular.module('hotelApp');
 
         app.controller("UserCtrl", function ($scope, User) {
             $scope.user = User.get();
-            console.log($scope.user);
+        });
+
+        app.controller("ReservationCtrl", function ($scope, Reservation) {
+            $scope.reservation = Reservation.get();
         });
         
         app.controller("RoomsController", function($scope, Room) {
@@ -53,9 +56,7 @@ var app = angular.module('hotelApp');
         });
 
         app.controller("MyBookingsController", function ($scope, Booking) {
-           $scope.bookings = Booking.get();
-           //upcoming bookings
-           //finished bookings 
+           $scope.bookings = Booking.get(); 
         });
 
 

@@ -121,6 +121,18 @@ var app = angular.module('hotelApp');
             };
         });
 
+        app.factory('Reservation', function() {
+            var reservation = {
+                id: '54362342', arrival: '15-12-2016', departure: '17-12-2016', name: 'Angelina Jolie', email: 'angie@gmail.com', price: '8904', hotelName: 'Sweet Home Sweet', roomName: 'Economy Double', image: 'img/pretty.jpg'  
+            };
+
+            return {
+                get: function() {
+                    return reservation;
+                }
+            };
+        });
+
         app.factory('Room', function() {
             var rooms = [
             {level: 'economy', price: '890', image: 'img/pier.jpg'},

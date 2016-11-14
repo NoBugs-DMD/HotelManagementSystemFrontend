@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="hotelApp">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>NoBugs Hotel Search Results</title>
+
+    <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css" rel="stylesheet">
+    <link href="bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="bower_components/jquery-ui/themes/base/jquery-ui.min.css" rel="stylesheet">
+    <link href="bower_components/social/bootstrap-social.css" rel="stylesheet">
+    <link href="myStyles.css" rel="stylesheet">
+</head>
+
+<body> 
+
+    <!-- navigation bar -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
+            <div>
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li id="home"><a href="index.html">NoBugs Hotel Search</a></li>
+                </ul>  
+                <ul class="nav navbar-right">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                         role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-menu-hamburger"
+                         aria-hidden="true"></span>
+                         <span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="mybookings.html">My Bookings</a></li>
+                            <li><a href="mybookings.html">My Profile</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a id="loginLink">Login / Sign Up</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Modals for Login & Sign up-->
+            <div id="loginModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+        <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                    <ul class="nav nav-pills nav-justified">
+                        <li class="active"><a data-toggle="pill" href="#loginTab">Login</a></li>
+                        <li><a data-toggle="pill" href="#signupTab">Sign Up</a></li>
+                    </ul>
+                    <p></p> <!-- gap between the pill and the content VERY BAD-->
+                    <div class="tab-content">
+                    <form role="form" id="loginTab" class="tab-pane fade in active">
+                    <div class="form-group">
+                        <label class="sr-only" for="email">Email address</label>
+                        <input type="email" class="form-control" id="email" placeholder="Email">
+                    </div>
+                    <div class="form-group">
+                        <label class="sr-only" for="password">Password</label>
+                        <input type="password" class="form-control" id="password" placeholder="Password">
+                    </div>
+                    <div class="checkbox">
+                        <label id="checkbox"> <input type="checkbox" >Remember me</label> 
+                    </div>        
+                    <button type="submit" class="btn btn-info">Login</button>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default btn-sm"
+                       data-dismiss="modal">Cancel</button>
+                    </div>
+                    </form>
+                    <p></p> <!-- gap between the pill and the content VERY BAD-->
+                    <form role="form" id="signupTab" class="tab-pane fade">
+                    <div class="form-group">
+                        <label class="sr-only" for="name">Login</label>
+                        <input type="login" class="form-control" id="login" placeholder="Login Name">
+                    </div>
+                    <div class="form-group">
+                        <label class="sr-only" for="name">Name</label>
+                        <input type="name" class="form-control" id="name" placeholder="Name">
+                    </div>
+                    <div class="form-group">
+                        <label class="sr-only" for="email">Email address</label>
+                        <input type="email" class="form-control" id="email" placeholder="Email">
+                    </div>
+                    <div class="form-group">
+                        <label class="sr-only" for="password">Password</label>
+                        <input type="password" class="form-control" id="password" placeholder="Password">
+                    </div>
+                    <div class="checkbox">
+                        <label id="checkbox"> <input type="checkbox" >Remember me</label> 
+                    </div>        
+                    <button type="submit" class="btn btn-warning" >Sign Up</button>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default btn-sm"
+                       data-dismiss="modal">Cancel</button>
+                    </div>
+                    </form>
+                    </div>
+                    </div>
+                 </div>
+            </div>
+        </div> <!-- Login modal ends -->
+
+    <div class="container-fluid" style="padding-top: 60px" ng-controller="ReservationCtrl">
+        <div class="row">
+        <div class="col-sm-6 col-sm-push-4">
+        <table class="booking-table table-responsive">
+        <tr>
+        <th colspan="3" class="booking-table-padding"><h3>Booking ID: {{reservation.id}}</h3></th>
+        </tr>
+        <tr>
+            <td class="booking-table-padding"><img ng-src="{{reservation.image}}" style="width:150px;height:150px"></td>
+            <td class="booking-table-padding">
+                <h2 class="media-heading"><a href="hotel.html">{{reservation.hotelName}}</a></h2>
+                <p>{{reservation.name}}<p>
+                <h4>{{reservation.roomName}}</h4>
+                <h4>{{reservation.price}} RUB</h4>
+                <h5>Arrival Date: {{reservation.arrival}}</h5>
+                <h5>Departure Date: {{reservation.departure}}</h5>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3" class="booking-table-padding"><a class="btn btn-info" id="modifyBooking">Modify</a> <a class="btn btn-danger" id="cancelBooking">Cancel</a> <a class="btn btn-success" id="leaveReview">Review Your Stay</a> </td>
+        </tr>
+        </table>
+        </div>
+        </div>
+        <div class="col-sm-6 col-sm-push-6" style="padding-top:30px">
+            <button><a href="javascript:window.print()" id="print-button"> Print </a>
+        </button>
+        </div>
+    </div>
+    <!-- modify modal starts -->
+    <div id="modifyModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4>Modify Your Booking</h4>
+                </div>
+                <div class="modal-body">
+                    <form role="form" class="form-inline">
+                        <div class="form-group">
+                            <label for="newDates">Choose New Dates</label>
+                            <div class="row">
+                            <div class="has-feedback col-sm-5">
+                                <input type="text" class="form-control" id="arrivalDate" name="date" aria-describedby="date" placeholder="Check In"><span class="glyphicon glyphicon-calendar form-control-feedback" aria-hidden="true"></span>
+                                <span id="date" class="sr-only">date-field</span>
+                            </div>
+                            <div class="has-feedback col-sm-5 col-sm-push-2">
+                                <input type="text" class="form-control" id="departureDate" name="date" aria-describedby="date" placeholder="Check Out"><span class="glyphicon glyphicon-calendar form-control-feedback" aria-hidden="true"></span>
+                                <span id="date" class="sr-only">date-field</span>
+                            </div>
+                            </div>
+                        </div>
+                    </form>
+                    <button type="submit" class="btn btn-warning" style="margin-top: 10px">Check</button>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-info">Save Changes</button>
+                    <button type="button" class="btn btn-default"
+                       data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end of modify modal -->
+    
+    <!-- cancel modal starts -->
+    <div id="cancelModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4>Cancel Your Booking</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you want to cancel your booking?</p>
+                    <button type="button" class="btn btn-danger">Yes</button>
+                    <button type="button" class="btn btn-default"
+                       data-dismiss="modal">No</button>
+                </div>
+            </div>
+        </div>
+    </div> <!-- end of cancel modal -->
+    
+    <!-- review modal starts -->
+    <div id="reviewModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4>Review Your Stay</h4>
+                </div>
+                <div class="modal-body">
+                    <form role="form">
+                        <div class="form-group">
+                            <label for="locationRate">Location</label>
+                            <select class="form-control" id="locationRate">
+                                <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="cleanlinessRate">Cleanliness</label>
+                            <select class="form-control" id="cleanlinessRate">
+                                <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="serviceRate">Service</label>
+                            <select class="form-control" id="serviceRate">
+                                <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="valueForMoney">Value For Money</label>
+                            <select class="form-control" id="valueForMoney">
+                                <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="comment">Review:</label>
+                            <textarea class="form-control" rows="5" id="comment"></textarea>
+                        </div>
+                    </form>
+                    <button type="button" class="btn btn-success">Submit</button>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default"
+                       data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end of review modal -->
+    <div></div>
+    
+
+    <!-- footer starts-->
+    <footer id="footer">
+        <div class="container-fluid">
+            <div class="row">             
+                <div class="col-xs-5 col-xs-offset-1 col-sm-2 col-sm-offset-1">
+                    <h5>Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="mybookings.html">My Bookings</a></li>
+                        <li><a href="mybookings.html">My Profile</a></li>
+                    </ul>
+                </div>
+                <div class="col-xs-6 col-sm-5">
+                    <h5>Our Address</h5>
+                    <address>
+                      1, Universitetskaya str.<br>
+                      Innopolis<br>
+                      RUSSIA<br>
+                      <i class="fa fa-phone"></i>: +79151234567<br>
+                        <i class="fa fa-envelope"></i>: 
+                                 <a href="mailto:nobugs@gmail.com">nobugs@gmail.com</a>
+                   </address>
+                </div>
+                <div class="col-xs-12 col-sm-4">
+                    <div class="nav navbar-nav" style="padding: 40px 10px;">
+                        <a class="btn btn-social-icon btn-google-plus" href="http://google.com/+"><i class="fa fa-google-plus"></i></a>
+                        <a class="btn btn-social-icon btn-facebook" href="http://www.facebook.com/profile.php?id="><i class="fa fa-facebook"></i></a>
+                        <a class="btn btn-social-icon btn-twitter" href="http://twitter.com/"><i class="fa fa-twitter"></i></a>
+                        <a class="btn btn-social-icon btn-vk" href="http://vk.com"><i class="fa fa-vk"></i></a>
+                    </div>
+                </div>
+                <div class="col-xs-12">
+                    <p style="padding:10px;"></p>
+                    <p align=center>© Copyright 2016 NoBugs DMD Team</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- footer ends-->
+        
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="bower_components/jquery-ui/jquery-ui.min.js"></script>
+    <script src="bower_components/angular/angular.min.js"></script>
+    <script src="app.js"></script>
+    <script src="controllers.js"></script>
+    <script src="factories.js"></script>
+
+    <!-- loading modals -->
+    <script>
+        $(document).ready(function(){
+            $("#loginLink").click(function(){
+                $("#loginModal").modal();
+            });
+        });
+        $(document).ready(function(){
+            $("#modifyBooking").click(function(){
+                $("#modifyModal").modal();
+            });
+        });
+        $(document).ready(function(){
+            $("#cancelBooking").click(function(){
+                $("#cancelModal").modal();
+            });
+        });
+        $(document).ready(function(){
+            $("#leaveReview").click(function(){
+                $("#reviewModal").modal();
+            });
+        });
+    </script>
+    <script type="text/javascript">
+        $(function () {
+                $('#arrivalDate').datepicker();
+                $('#departureDate').datepicker();
+        });
+    </script>
+
+</body>
+</html>

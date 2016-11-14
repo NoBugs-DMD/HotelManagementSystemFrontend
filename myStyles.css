@@ -60,16 +60,6 @@ input[type=login]:focus {
   font-size: 18px;
 }
 
-.row-footer {
-  margin: 0px auto;
-  padding: 20px 0px;
-  background-color: #AfAfAf;
-  width: 100%;
-  height: 100%;
-  left: 0;
-  z-index: 10;
-}
-
 .fullscreen {
   background-image: url("img/funny.jpg");
   background-size: 100%;
@@ -110,4 +100,38 @@ h3 {
 #sortedP {
   text-align: center;
   font-size: 22px;
+}
+
+.booking-table {
+  border: 1px solid black;
+  border-style: ridge;
+}
+
+.booking-table-padding {
+  padding: 15px;
+  border: 1px solid black;
+}
+
+#footer {
+  margin: 0px auto;
+  position:fixed;
+  margin-top: 10px;
+  padding: 20px 0px;
+  background-color: #AfAfAf;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  z-index: 10;
+}
+
+.row-footer {
+  margin: 0px auto;
+  position:fixed;
+  margin-top: 10px;
+  padding: 20px 0px;
+  background-color: #AfAfAf;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  z-index: 10;
 }
