@@ -12,7 +12,6 @@
     <link href="bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <link href="bower_components/jquery-ui/themes/base/jquery-ui.min.css" rel="stylesheet">
     <link href="bower_components/social/bootstrap-social.css" rel="stylesheet">
-    <link href="bower_components/angular-xeditable/dist/css/xeditable.css" rel="stylesheet">
     <link href="myStyles.css" rel="stylesheet">
 </head>
 
@@ -119,45 +118,21 @@
         <!-- Login modal ends -->
 
     <!-- main container starts -->
-    <div class="container-fluid" style="padding-top: 60px" >
-        <!-- my profile info -->  
-        <h3>My Profile</h3>  
-        <div class="row">
-        <form role="form" id="userInfo" class="form-inline" editable-form>
-            <div class="form-group" ng-controller="FormCtrl" id="FormCtrl">
-                <label for="name">Login</label>
-                <a href="#" editable-text="user.name">{{ user.name ||"empty" }}</a>
-            </div>
-            <div class="form-group">
-                <label class="sr-only" for="name">Name</label>
-                <input type="name" class="form-control" id="name" placeholder="Name">
-            </div>
-            <div class="form-group">
-                <label class="sr-only" for="email">Email address</label>
-                <input type="email" class="form-control" id="email" placeholder="Email">
-            </div>
-            <div class="form-group">
-                <label class="sr-only" for="password">Password</label>
-                <input type="password" class="form-control" id="password" placeholder="Password">
-            </div>        
-            <button type="submit" class="btn btn-warning" >Save</button>
-        </form>
-        </div>
+    <div class="container-fluid" style="padding-top: 60px;">
         <!-- List of Bookings -->
         <h3>My Bookings</h3>
         <div class="row" ng-controller="MyBookingsController">
             <ul class="media-list">
                 <li class="col-sm-4 media" ng-repeat="b in bookings">
-                    <div class="media-left media-middle">
-                        <a href="#">
+                    <div class="media-left">
                         <img class="media-object img-thumbnail" style="width:150px;height:150px"
                          ng-src={{b.image}}>
-                        </a>
                     </div>
                     <div class="media-body">
                         <h2 class="media-heading"><a href="hotel.html">{{b.hotelName}}</a></h2>
                         <h4>{{b.arrival}} - {{b.departure}}</h4>
                         <p style="font-size: 18px">{{b.price}}RUB</p>
+                        <a href="booking.html" class="btn btn-danger">View Details</a>
                     </div>
                 </li>
             </ul>
@@ -208,7 +183,6 @@
     <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="bower_components/jquery-ui/jquery-ui.min.js"></script>
     <script src="bower_components/angular/angular.min.js"></script>
-    <script src="bower_components/angular-xeditable/dist/js/xeditable.js"></script>
     <script src="app.js"></script>
     <script src="controllers.js"></script>
     <script src="factories.js"></script>

@@ -106,6 +106,21 @@ var app = angular.module('hotelApp');
             };
         });
 
+        app.factory('User', function() {
+            var user = {
+                login: "angie",
+                name: "Angelina Jolie",
+                email: "angie@gmail.com",
+                password: "72dfs83"
+            };
+
+            return {
+                get: function() {
+                    return user;
+                }
+            };
+        });
+
         app.factory('Room', function() {
             var rooms = [
             {level: 'economy', price: '890', image: 'img/pier.jpg'},

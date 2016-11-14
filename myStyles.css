@@ -81,6 +81,12 @@ input[type=login]:focus {
   top: 38px;
   z-index: 10;
 }
+
+.row-padding {
+  padding-top: 60px;
+  padding-left: 60px
+}
+
 .form-row {
   padding-top:70px; 
   margin-left:80px; 
@@ -95,6 +101,7 @@ h3 {
   text-align: center;
   color: #252628;
 }
+
 #getMoreBtn {
   margin-top: 20px;
   margin-bottom: 20px;

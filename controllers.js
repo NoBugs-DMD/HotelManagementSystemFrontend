@@ -42,10 +42,9 @@ var app = angular.module('hotelApp');
             };
         });
 
-        app.controller("FormCtrl", function ($scope) {
-            $scope.user = {
-                name: "Angelina Jolie"
-            };
+        app.controller("UserCtrl", function ($scope, User) {
+            $scope.user = User.get();
+            console.log($scope.user);
         });
         
         app.controller("RoomsController", function($scope, Room) {
