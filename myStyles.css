@@ -179,3 +179,8 @@ h3 {
 .tt-suggestion p {
   margin: 0;
 }
+
+.adminTable {
+  padding: 5px;
+  border: 1px solid black;
+}

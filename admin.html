@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="hotelApp">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>NoBugs Hotel Search Results</title>
+
+    <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css" rel="stylesheet">
+    <link href="bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="bower_components/jquery-ui/themes/base/jquery-ui.min.css" rel="stylesheet">
+    <link href="bower_components/social/bootstrap-social.css" rel="stylesheet">
+    <link href="myStyles.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- navigation bar -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
+            <div>
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li id="home"><a href="index.html">NoBugs Hotel Search</a></li>
+                </ul>  
+                <ul class="nav navbar-right">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                         role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-menu-hamburger"
+                         aria-hidden="true"></span>
+                         <span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="mybookings.html">My Bookings</a></li>
+                            <li><a href="mybookings.html">My Profile</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li class="disabled"><a id="loginLink">Login / Sign Up</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- main container starts -->
+    <div class="container-fluid" style="padding-top: 60px">
+        <div class="row" ng-controller="HotelCtrl">
+            <h3>Your Hotels</h3>
+            <div class="col-sm-12" ng-repeat="hotel in hotels" ng-controller="ShowCtrl">
+                <button class="btn btn-link" id="moreAboutHotel" ng-click="showHotel()"><h4><span class="caret"></span> {{hotel.name}}</h4></button>
+                <!-- div for individual hotels-->
+                <div ng-show="shouldShow" class="ng-cloak">
+                    <ul class="nav nav-tabs nav-justified">
+                        <li class="nav-item"><a class="nav-link" href="#info" data-toggle="tab">General Info</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#staff" data-toggle="tab">Staff</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#rooms" data-toggle="tab">Rooms</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#bookings" data-toggle="tab">Bookings</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#rules" data-toggle="tab">RuleSet</a></li>
+                    </ul>
+                    <div class="tab-content" >
+                    <!-- start of General Info Tab -->
+                        <div class="tab-pane" id="info" role="tabpanel" ng-controller="CurrentHotelCtrl">
+                            <ul class="media-list">
+                                <li class="col-sm-12 media">
+                                    <div class="media-left media-middle">
+                                        <a href="#">
+                                        <img class="media-object img-thumbnail" style="width:150px;height:150px"
+                                        ng-src={{currentHotel.image}}>
+                                        </a>
+                                    </div>
+                                    <div class="media-body">
+                                        <h2 class="media-heading">{{currentHotel.name}} <span class="label label-warning">{{currentHotel.stars}}</span>
+                                        <a href="reviews.html"><span class="badge">{{currentHotel.rating}}</span></a></h2>
+                                        <p style="font-size: 18px">{{currentHotel.description}}</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- end of General Info Tab -->
+                        <!-- start of Employees -->
+                        <div class="tab-pane" id="staff" role="tabpanel"  ng-controller="RoleCtrl">
+                            <table width="100%" ng-controller="EmpsCtrl">
+                                <tr>
+                                    <th class="adminTable" colspan="4" style="text-align: center">List of Employees</th>
+                                </tr>
+                                <tr ng-repeat="emp in employees track by $index">
+                                    <td class="adminTable">{{emp.name}}</td>
+                                    <td class="adminTable">{{emp.email}}</td>
+                                    <td class="adminTable">{{emp.position}}</td>
+                                    <td class="adminTable" ng-show="boss" ><button class="btn btn-danger btn-sm">Dismiss</button></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <!-- end of Employees -->
+                        <!-- start of Rooms -->
+                        <div class="tab-pane" id="rooms" role="tabpanel">
+                            
+                        </div>
+                        <!-- end of Rooms -->
+                        <div class="tab-pane" id="booking" role="tabpanel">hehe</div>
+                        <div class="tab-pane" id="rules" role="tabpanel">hehe</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> <!-- main container ends -->
+
+
+    <!-- footer starts-->
+    <footer class="row-footer">
+        <div class="container-fluid">
+            <div class="row">             
+                <div class="col-xs-5 col-xs-offset-1 col-sm-2 col-sm-offset-1">
+                    <h5>Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="admin.html">Admin Page</a></li>
+                    </ul>
+                </div>
+                <div class="col-xs-6 col-sm-5">
+                    <h5>Our Address</h5>
+                    <address>
+                      1, Universitetskaya str.<br>
+                      Innopolis<br>
+                      RUSSIA<br>
+                      <i class="fa fa-phone"></i>: +79151234567<br>
+                        <i class="fa fa-envelope"></i>: 
+                                 <a href="mailto:nobugs@gmail.com">nobugs@gmail.com</a>
+                   </address>
+                </div>
+                <div class="col-xs-12 col-sm-4">
+                    <div class="nav navbar-nav" style="padding: 40px 10px;">
+                        <a class="btn btn-social-icon btn-google-plus" href="http://google.com/+"><i class="fa fa-google-plus"></i></a>
+                        <a class="btn btn-social-icon btn-facebook" href="http://www.facebook.com/profile.php?id="><i class="fa fa-facebook"></i></a>
+                        <a class="btn btn-social-icon btn-twitter" href="http://twitter.com/"><i class="fa fa-twitter"></i></a>
+                        <a class="btn btn-social-icon btn-vk" href="http://vk.com"><i class="fa fa-vk"></i></a>
+                    </div>
+                </div>
+                <div class="col-xs-12">
+                    <p style="padding:10px;"></p>
+                    <p align=center>© Copyright 2016 NoBugs DMD Team</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- footer ends-->
+
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="bower_components/jquery-ui/jquery-ui.min.js"></script>
+    <script src="bower_components/angular/angular.min.js"></script>
+    <script src="app.js"></script>
+    <script src="factories.js"></script>
+    <script src="controllers.js"></script>
+
+    </body>
+
+</html>

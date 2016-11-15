@@ -46,6 +46,9 @@ var app = angular.module('hotelApp');
                 }, 
                 total: function() {     
                     return hotels.length; 
+                },
+                getHotels: function() {
+                    return hotels;
                 }
             };
         });
@@ -111,12 +114,21 @@ var app = angular.module('hotelApp');
                 login: "angie",
                 name: "Angelina Jolie",
                 email: "angie@gmail.com",
-                password: "72dfs83"
+                password: "72dfs83",
+                position: 'manager'
+            };
+
+            var employees = [];
+            for (var i = 0; i < 10; i++) {
+                employees.push(user);
             };
 
             return {
                 get: function() {
                     return user;
+                },
+                emps: function() {
+                    return employees;
                 }
             };
         });
@@ -160,5 +172,61 @@ var app = angular.module('hotelApp');
                 }
             };
         });
+
+        app.factory('RoomLevel', function() {
+            var levels = [
+            {level: 'economy', price: '890'},
+            {level: 'single', price: '1000'},
+            {level: 'double', price: '1500'},
+            {level: 'suite', price: '3000'},
+            ];
+
+            return {
+                get: function() {
+                    return levels;
+                }
+            };
+        });
+
+        app.factory('ClientLevel', function() {
+            var levels = [
+            {bookingsAmount: 5, price: '3'},
+            {bookingsAmount: 10,price: '5'},
+            {bookingsAmount: 20, price: '7'},
+            {bookingsAmount: 50, price: '10'},
+            ];
+
+            return {
+                get: function() {
+                    return levels;
+                }
+            };
+        });
+
+        app.factory('Role', function() {
+            var roles = {
+                isBoss: true,
+                isManager: true,
+                isReceptionist: true,
+                isCleaner: true
+            };
+
+            return {
+                getBoss: function() {
+                    return roles.isBoss;
+                },
+                getManager: function() {
+                    return roles.isManager;
+                },
+                getReceptionist: function() {
+                    return roles.isReceptionist;
+                },
+                getCleaner: function() {
+                    return roles.isCleaner;
+                }
+            };
+        });
+
+
 
 

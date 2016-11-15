@@ -42,24 +42,53 @@ var app = angular.module('hotelApp');
             };
         });
 
+        app.controller("HotelCtrl", function ($scope, Hotel) {
+            $scope.hotels = Hotel.getHotels(); //getting an array of hotels (description only)
+        });
         app.controller("UserCtrl", function ($scope, User) {
-            $scope.user = User.get();
+            $scope.user = User.get(); //getting the current user
         });
 
         app.controller("ReservationCtrl", function ($scope, Reservation) {
-            $scope.reservation = Reservation.get();
+            $scope.reservation = Reservation.get(); //getting the current reservation
         });
 
         app.controller("CurrentHotelCtrl", function ($scope, Onehotel) {
-            $scope.currentHotel = Onehotel.get();
+            $scope.currentHotel = Onehotel.get(); //getting the current hotel
         });
         
         app.controller("RoomController", function($scope, Room) {
-            $scope.rooms = Room.get();
+            $scope.rooms = Room.get(); //getting an array of rooms
         });
 
-        app.controller("MyBookingsController", function ($scope, Booking) {
-           $scope.bookings = Booking.get(); 
+        app.controller("MyBookingsController", function($scope, Booking) {
+           $scope.bookings = Booking.get(); //getting an array of bookings
         });
 
+        app.controller("EmpsCtrl", function($scope, User) {
+            $scope.employees = User.emps(); //getting an array of employees
+        });
+
+        app.controller("RoomLvlCtrl", function($scope, RoomLevel) {
+           $scope.roomLevels = RoomLevel.get(); //getting an array of room levels
+        });
+
+        app.controller("ClientLvlCtrl", function($scope, ClientLevel) {
+           $scope.clientLevels = ClientLevel.get(); //getting an array of client levels
+        });
+
+        app.controller("ShowCtrl", function($scope) {
+            $scope.showHotel = function(){
+                $scope.shouldShow = !$scope.shouldShow; //toggling list of hotels
+            };
+        });
+
+        //checking roles
+        app.controller("RoleCtrl", function($scope, Role) {
+            $scope.boss = Role.getBoss();
+            $scope.manager = Role.getManager();
+            $scope.receptionist = Role.getReceptionist();
+            $scope.cleaner = Role.getCleaner();
+            console.log($scope.boss);
+        });
 
