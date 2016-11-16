@@ -78,8 +78,8 @@ var app = angular.module('hotelApp');
         });
 
         app.controller("ShowCtrl", function($scope) {
-            $scope.showHotel = function(){
-                $scope.shouldShow = !$scope.shouldShow; //toggling list of hotels
+            $scope.showMore = function(){
+                $scope.shouldShow = !$scope.shouldShow; //toggling lists
             };
         });
 

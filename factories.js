@@ -2,41 +2,41 @@ var app = angular.module('hotelApp');
 
 	app.factory('Hotel', function() {
             var hotels = [
-            { name: 'Marijuana Legal', image: 'img/pier.jpg', rating: '8.5', price: '4349', stars: '3'
+            { id: 342, name: 'Marijuana Legal', image: 'img/pier.jpg', rating: '8.5', price: '4349', stars: '3'
             },
-            { name: 'Hotel Sweet Hotel', image: 'img/car.jpg', rating: '8.3', price: '2329', stars: '3'
+            { id: 343, name: 'Hotel Sweet Hotel', image: 'img/car.jpg', rating: '8.3', price: '2329', stars: '3'
             },
-            { name: 'Our Own Hotel', image: 'img/glassHat.jpg', rating: '8.0', price: '1389', stars: '3'
+            { id: 344, name: 'Our Own Hotel', image: 'img/glassHat.jpg', rating: '8.0', price: '1389', stars: '3'
             },
-            { name: 'Blackjack and Sluts', image: 'img/slippers.jpg', rating: '8.5', price: '4349', stars: '3'
+            { id: 345, name: 'Blackjack and Sluts', image: 'img/slippers.jpg', rating: '8.5', price: '4349', stars: '3'
             },
-            { name: 'Not The Best Hotel', image: 'img/slipperCoconut.jpg', rating: '8.3', price: '2329', stars: '3'
+            { id: 346, name: 'Not The Best Hotel', image: 'img/slipperCoconut.jpg', rating: '8.3', price: '2329', stars: '3'
             },
-            { name: 'We Could Be Better', image: 'img/oceanPier.jpg', rating: '8.0', price: '1389', stars: '3'
+            { id: 347, name: 'We Could Be Better', image: 'img/oceanPier.jpg', rating: '8.0', price: '1389', stars: '3'
             },
-            { name: 'Blackjack and Sluts', image: 'img/hammock.jpg', rating: '8.5', price: '4349', stars: '3'
+            { id: 348, name: 'Blackjack and Sluts', image: 'img/hammock.jpg', rating: '8.5', price: '4349', stars: '3'
             },
-            { name: 'Not The Best Hotel', image: 'img/maldives.jpg', rating: '8.3', price: '2329', stars: '3'
+            { id: 349, name: 'Not The Best Hotel', image: 'img/maldives.jpg', rating: '8.3', price: '2329', stars: '3'
             },
-            { name: 'We Could Be Better', image: 'img/pretty.jpg', rating: '8.0', price: '1389', stars: '3'
+            { id: 350, name: 'We Could Be Better', image: 'img/pretty.jpg', rating: '8.0', price: '1389', stars: '3'
             },
-            { name: 'Marijuana Legal', image: 'img/pier.jpg', rating: '8.5', price: '4349', stars: '3'
+            { id: 351, name: 'Marijuana Legal', image: 'img/pier.jpg', rating: '8.5', price: '4349', stars: '3'
             },
-            { name: 'Hotel Sweet Hotel', image: 'img/car.jpg', rating: '8.3', price: '2329', stars: '3'
+            { id: 352, name: 'Hotel Sweet Hotel', image: 'img/car.jpg', rating: '8.3', price: '2329', stars: '3'
             },
-            { name: 'Our Own Hotel', image: 'img/glassHat.jpg', rating: '8.0', price: '1389', stars: '3'
+            { id: 353, name: 'Our Own Hotel', image: 'img/glassHat.jpg', rating: '8.0', price: '1389', stars: '3'
             },
-            { name: 'Blackjack and Sluts', image: 'img/slippers.jpg', rating: '8.5', price: '4349', stars: '3'
+            { id: 354, name: 'Blackjack and Sluts', image: 'img/slippers.jpg', rating: '8.5', price: '4349', stars: '3'
             },
-            { name: 'Not The Best Hotel', image: 'img/slipperCoconut.jpg', rating: '8.3', price: '2329', stars: '3'
+            { id: 355, name: 'Not The Best Hotel', image: 'img/slipperCoconut.jpg', rating: '8.3', price: '2329', stars: '3'
             },
-            { name: 'We Could Be Better', image: 'img/oceanPier.jpg', rating: '8.0', price: '1389', stars: '3'
+            { id: 356, name: 'We Could Be Better', image: 'img/oceanPier.jpg', rating: '8.0', price: '1389', stars: '3'
             },
-            { name: 'Blackjack and Sluts', image: 'img/hammock.jpg', rating: '8.5', price: '4349', stars: '3'
+            { id: 357, name: 'Blackjack and Sluts', image: 'img/hammock.jpg', rating: '8.5', price: '4349', stars: '3'
             },
-            { name: 'Not The Best Hotel', image: 'img/maldives.jpg', rating: '8.3', price: '2329', stars: '3'
+            { id: 358, name: 'Not The Best Hotel', image: 'img/maldives.jpg', rating: '8.3', price: '2329', stars: '3'
             },
-            { name: 'We Could Be Better', image: 'img/pretty.jpg', rating: '8.0', price: '1389', stars: '3'
+            { id: 359, name: 'We Could Be Better', image: 'img/pretty.jpg', rating: '8.0', price: '1389', stars: '3'
             }
             ];
 
@@ -92,14 +92,14 @@ var app = angular.module('hotelApp');
 
         app.factory('Booking', function() {
             var bookings = [
-            {id: '54362342', arrival: '15-12-2016', departure: '17-12-2016', name: 'Angelina Jolie', email: 'angie@gmail.com', price: '8904', hotelName: 'Sweet Home Sweet', image: 'img/pretty.jpg'},
-            {id: '54362342', arrival: '12-12-2016', departure: '19-12-2016', name: 'Angelina Jolie', email: 'angie@gmail.com', price: '8904', hotelName: 'Sweet Home Sweet', image: 'img/pretty.jpg'},
-            {id: '54362342', arrival: '11-11-2016', departure: '10-12-2016', name: 'Angelina Jolie', email: 'angie@gmail.com', price: '8904', hotelName: 'Sweet Home Sweet', image: 'img/pretty.jpg'},
-            {id: '54362342', arrival: '31-12-2016', departure: '01-01-2017', name: 'Angelina Jolie', email: 'angie@gmail.com', price: '8904', hotelName: 'Sweet Home Sweet', image: 'img/pretty.jpg'},
-            {id: '54362342', arrival: '15-12-2016', departure: '17-12-2016', name: 'Angelina Jolie', email: 'angie@gmail.com', price: '8904', hotelName: 'Sweet Home Sweet', image: 'img/pretty.jpg'},
-            {id: '54362342', arrival: '15-12-2016', departure: '17-12-2016', name: 'Angelina Jolie', email: 'angie@gmail.com', price: '8904', hotelName: 'Sweet Home Sweet', image: 'img/pretty.jpg'},
-            {id: '54362342', arrival: '15-12-2016', departure: '17-12-2016', name: 'Angelina Jolie', email: 'angie@gmail.com', price: '8904', hotelName: 'Sweet Home Sweet', image: 'img/pretty.jpg'},
-            {id: '54362342', arrival: '15-12-2016', departure: '17-12-2016', name: 'Angelina Jolie', email: 'angie@gmail.com', price: '8904', hotelName: 'Sweet Home Sweet', image: 'img/pretty.jpg'},
+            {id: '54362342', arrival: '15-12-2016', departure: '17-12-2016', name: 'Angelina Jolie', email: 'angie@gmail.com', price: '8904', hotelName: 'Sweet Home Sweet', image: 'img/pretty.jpg', roomNum: 4},
+            {id: '54362342', arrival: '12-12-2016', departure: '19-12-2016', name: 'Angelina Jolie', email: 'angie@gmail.com', price: '8904', hotelName: 'Sweet Home Sweet', image: 'img/pretty.jpg', roomNum: 5},
+            {id: '54362342', arrival: '11-11-2016', departure: '10-12-2016', name: 'Angelina Jolie', email: 'angie@gmail.com', price: '8904', hotelName: 'Sweet Home Sweet', image: 'img/pretty.jpg', roomNum: 6},
+            {id: '54362342', arrival: '31-12-2016', departure: '01-01-2017', name: 'Angelina Jolie', email: 'angie@gmail.com', price: '8904', hotelName: 'Sweet Home Sweet', image: 'img/pretty.jpg', roomNum: 7},
+            {id: '54362342', arrival: '15-12-2016', departure: '17-12-2016', name: 'Angelina Jolie', email: 'angie@gmail.com', price: '8904', hotelName: 'Sweet Home Sweet', image: 'img/pretty.jpg', roomNum: 8},
+            {id: '54362342', arrival: '15-12-2016', departure: '17-12-2016', name: 'Angelina Jolie', email: 'angie@gmail.com', price: '8904', hotelName: 'Sweet Home Sweet', image: 'img/pretty.jpg', roomNum: 9},
+            {id: '54362342', arrival: '15-12-2016', departure: '17-12-2016', name: 'Angelina Jolie', email: 'angie@gmail.com', price: '8904', hotelName: 'Sweet Home Sweet', image: 'img/pretty.jpg', roomNum: 10},
+            {id: '54362342', arrival: '15-12-2016', departure: '17-12-2016', name: 'Angelina Jolie', email: 'angie@gmail.com', price: '8904', hotelName: 'Sweet Home Sweet', image: 'img/pretty.jpg', roomNum: 11},
             ];
 
             return {
@@ -159,11 +159,11 @@ var app = angular.module('hotelApp');
 
         app.factory('Room', function() {
             var rooms = [
-            {level: 'economy', price: '890', image: 'img/glassHat.jpg'},
-            {level: 'suite', price: '8905', image: 'img/glassHat.jpg'},
-            {level: 'double', price: '5432', image: 'img/glassHat.jpg'},
-            {level: 'single', price: '1900', image: 'img/glassHat.jpg'},
-            {level: 'dorms', price: '890', image: 'img/glassHat.jpg'},
+            {level: 'economy', price: '890', image: 'img/glassHat.jpg', roomNum: 4},
+            {level: 'suite', price: '8905', image: 'img/glassHat.jpg', roomNum: 5},
+            {level: 'double', price: '5432', image: 'img/glassHat.jpg', roomNum: 6},
+            {level: 'single', price: '1900', image: 'img/glassHat.jpg', roomNum: 7},
+            {level: 'dorms', price: '890', image: 'img/glassHat.jpg', roomNum: 8},
             ];
 
             return {

@@ -50,23 +50,23 @@
     </nav>
 
     <!-- main container starts -->
-    <div class="container-fluid" style="padding-top: 60px">
+    <div class="container-fluid" style="padding-top: 60px" ng-controller="RoleCtrl">
         <div class="row" ng-controller="HotelCtrl">
             <h3>Your Hotels</h3>
             <div class="col-sm-12" ng-repeat="hotel in hotels" ng-controller="ShowCtrl">
-                <button class="btn btn-link" id="moreAboutHotel" ng-click="showHotel()"><h4><span class="caret"></span> {{hotel.name}}</h4></button>
+                <button class="btn btn-link" id="moreAboutHotel" ng-click="showMore()"><h4><span class="caret"></span> {{hotel.name}}</h4></button>
                 <!-- div for individual hotels-->
                 <div ng-show="shouldShow" class="ng-cloak">
                     <ul class="nav nav-tabs nav-justified">
-                        <li class="nav-item"><a class="nav-link" href="#info" data-toggle="tab">General Info</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#staff" data-toggle="tab">Staff</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#rooms" data-toggle="tab">Rooms</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#bookings" data-toggle="tab">Bookings</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#rules" data-toggle="tab">RuleSet</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#info{{hotel.id}}" data-toggle="tab">General Info</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#staff{{hotel.id}}" data-toggle="tab">Staff</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#rooms{{hotel.id}}" data-toggle="tab">Rooms</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#bookings{{hotel.id}}" data-toggle="tab">Bookings</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#rules{{hotel.id}}" data-toggle="tab">RuleSet</a></li>
                     </ul>
                     <div class="tab-content" >
                     <!-- start of General Info Tab -->
-                        <div class="tab-pane" id="info" role="tabpanel" ng-controller="CurrentHotelCtrl">
+                        <div class="tab-pane" id="info{{hotel.id}}" role="tabpanel" ng-controller="CurrentHotelCtrl">
                             <ul class="media-list">
                                 <li class="col-sm-12 media">
                                     <div class="media-left media-middle">
@@ -81,12 +81,30 @@
                                         <p style="font-size: 18px">{{currentHotel.description}}</p>
                                     </div>
                                 </li>
-                            </ul>
+                                <!-- change hotel info -->
+                                <form role="form" class="col-sm-12" ng-show="boss" id="changeInfoForm">
+                                    <h3 style="text-align: left">Change Information</h3>
+                                    <div class="form-group">
+                                        <label for="name">Name</label>
+                                        <input type="text" name="name" placeholder="Hotel Name">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="stars">Stars</label>
+                                        <input type="number" name="stars" placeholder="Stars">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="name">Description</label>
+                                        <textarea rows="4" name="description" class="form-control" placeholder="Hotel Description"></textarea>
+                                    </div>
+                                    <button type="submit" class="btn btn-success">Change Information</button>
+                                </form>
+                            </ul>   
                         </div>
                         <!-- end of General Info Tab -->
                         <!-- start of Employees -->
-                        <div class="tab-pane" id="staff" role="tabpanel"  ng-controller="RoleCtrl">
-                            <table width="100%" ng-controller="EmpsCtrl">
+                        <div class="tab-pane" id="staff{{hotel.id}}" role="tabpanel"  ng-controller="RoleCtrl">
+                            <button class="btn btn-success" style="margin-top: 20px" data-toggle="modal" data-target="#addEmpModal">Add an Employee</button>
+                            <table width="100%" ng-controller="EmpsCtrl" class="table-hover">
                                 <tr>
                                     <th class="adminTable" colspan="4" style="text-align: center">List of Employees</th>
                                 </tr>
@@ -100,16 +118,154 @@
                         </div>
                         <!-- end of Employees -->
                         <!-- start of Rooms -->
-                        <div class="tab-pane" id="rooms" role="tabpanel">
-                            
+                        <div class="tab-pane" id="rooms{{hotel.id}}" role="tabpanel">
+                        <h2 style="text-align: center">Rooms</h2>
+                        <button class="btn btn-success" style="margin-bottom: 20px" data-toggle="modal" data-target="#addARoomModal">Add a Room</button>
+                            <div class="row" ng-controller="RoomController">
+                                <ul class="media-list">
+                                    <li class="media col-sm-4" ng-repeat="room in rooms">
+                                    <div class="media-left media-middle">
+                                        <a href="#">
+                                        <img class="media-object img-thumbnail" style="width:150px;height:150px" ng-src={{room.image}}>
+                                        </a>
+                                    </div>
+                                    <div class="media-body">
+                                        <h2 class="media-heading">{{room.level | uppercase}}</h2>
+                                        <p style="font-size: 18px">{{room.price}}RUB</p>
+                                        <p style="font-size: 18px">{{room.roomNum}}</p>
+                                        <a href="#" class="btn btn-danger" id="deleteARoom">Delete</a>
+                                    </div>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                         <!-- end of Rooms -->
-                        <div class="tab-pane" id="booking" role="tabpanel">hehe</div>
-                        <div class="tab-pane" id="rules" role="tabpanel">hehe</div>
+                        <div class="tab-pane" id="bookings{{hotel.id}}" role="tabpanel">
+                            <a href="makeabooking.html" class="btn btn-success" style="margin-top: 20px">Add a Booking</a>
+                            <table style="width: 100%" ng-controller="MyBookingsController" class="table-hover">
+                                <tr>
+                                    <th class="adminTable" colspan="6" style="text-align: center">Bookings</th>
+                                </tr>
+                                <tr ng-repeat="b in bookings">
+                                    <td class="adminTable">id: {{b.id}}</td>
+                                    <td class="adminTable">{{b.arrival}}</td>
+                                    <td class="adminTable">{{b.departure}}</td>
+                                    <td class="adminTable">{{b.price}}RUB</td>
+                                    <td class="adminTable">{{b.name}}</td>
+                                    <td class="adminTable">Room Number: {{b.roomNum}}</td>
+                                    <td class="adminTable"><a href="booking.html" class="btn btn-info">Change The Booking</a></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <!-- start of rule set-->
+                        <div class="tab-pane" id="rules{{hotel.id}}" role="tabpanel">
+                            <div class="container">
+                            <div class="row">
+                                <h3>Current RuleSet</h3>
+                                <div class="col-sm-6" ng-controller="RoomLvlCtrl">
+                                    <h4>Room Levels</h4>
+                                    <table class="table-hover table">
+                                        <tr><th>Level</th><th>Cost Per Night</th></tr>
+                                        <tr ng-repeat="roomlvl in roomLevels">
+                                        <td>{{roomlvl.level}}</td><td>{{roomlvl.price}}</td></tr>
+                                    </table>
+                                </div>
+                                <div class="col-sm-6" ng-controller="ClientLvlCtrl">
+                                <h4>Client Levels</h4>
+                                <table class="table-hover table">
+                                    <tr><th>Bookings</th><th>Percentage</th></tr>
+                                    <tr ng-repeat="clientlvl in clientLevels">
+                                    <td>{{clientlvl.bookingsAmount}}</td><td>{{clientlvl.price}}</td></tr>
+                                </table>
+                                </div>
+                            </div>
+                            <form role="form" class="col-sm-12" ng-show="boss" id="changeRulesForm">
+                                <h3>Change Cost & Discount</h3>
+                                <div class="col-sm-6" ng-controller="RoomLvlCtrl">
+                                    <h4>Room Levels</h4>
+                                    <div class="form-group" ng-repeat="roomlvl in roomLevels">
+                                        <label for="roomLevel">{{roomlvl.level}}</label>
+                                        <input type="number" name="roomCost" class="form-control" placeholder="Cost Per Night">
+                                    </div>
+                                </div>
+                                <div class="col-sm-6" ng-controller="ClientLvlCtrl">
+                                    <h4>Client Levels</h4>
+                                    <div class="form-group" ng-repeat="clientlvl in clientLevels">
+                                        <label for="clientLevel">{{clientlvl.bookingsAmount}} bookings</label>
+                                        <input type="number" name="discount" class="form-control" placeholder="Discount Percentage">
+                                    </div>
+                                </div>
+                                <button class="btn btn-success col-sm-2 col-sm-push-5">Submit</button>
+                            </form>
+                            </div>
+                        </div> <!-- end of rule set-->
                     </div>
                 </div>
             </div>
         </div>
+        <!-- adding an employee modal -->
+        <div id="addEmpModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4>Add a New Employee</h4>
+                </div>
+                <div class="modal-body">
+                    <form role="form" id="newEmpForm">
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="name" placeholder="Name">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="email" placeholder="Email">
+                        </div>
+                        <div class="form-group">
+                            <select class="form-control" id="roles">
+                                <option value="manager">Manager</option>
+                                <option value="receptionist">Receptionist</option>
+                                <option value="cleaner">Cleaner</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-success">Submit</button>          
+                    </form>   
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default btn-sm"
+                       data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+        </div>
+        <!-- adding a room modal -->
+        <div id="addARoomModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <form role="form" ng-controller="RoomLvlCtrl">
+                    <div class="form-group" ng-repeat="lvl in roomLevels">
+                        <input type="radio"  name="selectRoomLevel" value="{{lvl.level}}"> {{lvl.level}}</br>
+                    </div>
+                    <div class="form-group">
+                        <label for="roomNum">Room Number</label>
+                        <input type="number" name="roomNumber"> 
+                    </div>
+                    <div class="form-group">
+                        <label for="roomPic">Image</label>
+                        <input type="file" name="roomPic" accept="image/*">
+                        <input type="submit">
+                    </div>
+                    <button type="submit" class="btn btn-success">Submit</button>
+                </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default btn-sm"
+                       data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+        </div> <!-- end of room modal-->
+    
     </div> <!-- main container ends -->
 
 
@@ -160,6 +316,13 @@
     <script src="factories.js"></script>
     <script src="controllers.js"></script>
 
+    <script type="text/javascript">
+        $(function () {
+                $('#arrivalDate').datepicker();
+                $('#departureDate').datepicker();
+        });
+    </script>
+    
     </body>
 
 </html>
