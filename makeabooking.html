@@ -120,44 +120,7 @@
     <div class="container" style="padding-top: 60px">
         <div class="row" ng-controller="CurrentHotelCtrl">
             <h2 style="text-align: center">You're about to make a booking at <a href="hotel.html">{{currentHotel.name}}...</a></h2>
-        <!-- fill in booking info about the guest -->
-        <form role="form" class="form-inline" style="padding-top: 20px">
-        <h4>But first, tell us a little about yourself</h4>
-            <div class="form-group col-sm-3">
-                <label for="name">Name: </label>
-                <input type="text" name="name" placeholder="Full Name" class="form-control">
-            </div>
-            <div class="form-group col-sm-3">
-                <label for="email">Email: </label>
-                <input type="text" name="email" placeholder="Email" class="form-control">
-            </div>
-        </form>
-        <!-- fill in booking info about the guest ends -->
         </div>
-        
-        <!-- search for other dates starts -->
-        <div class="row" style="padding-top: 40px">
-        <form role="form">
-        <h4>When do you want to check in and check out?</h4>
-            <div class="form-group col-sm-3">
-                <label for="fromDate">CHECK IN</label>
-                <div class="has-feedback">
-                    <input type="text" class="form-control" id="arrivalDate" name="date" aria-describedby="date" placeholder="Check In"><span class="glyphicon glyphicon-calendar form-control-feedback" aria-hidden="true"></span>
-                    <span id="date" class="sr-only">date-field</span>
-                </div>
-            </div>
-            <div class="form-group col-sm-3">
-                <label for="untilDate">CHECK OUT</label>
-                <div class="has-feedback">
-                    <input type="text" class="form-control" id="departureDate" name="date" aria-describedby="date" placeholder="Check Out"><span class="glyphicon glyphicon-calendar form-control-feedback" aria-hidden="true"></span>
-                    <span id="date" class="sr-only">date-field</span>
-                </div>
-            </div>
-            <div class="form-group col-sm-2" style="padding-top:25px">
-                <button type="submit" class="btn btn-danger" id="search"><span class="glyphicon glyphicon-search"></span></button>
-            </div>
-        </form> 
-        </div> <!-- search for other dates ends -->
         
     <!-- place for available rooms template -->
     <div class="row" ng-controller="RoomController">
@@ -172,14 +135,14 @@
                     </div>
                     <div class="media-body">
                         <h2 class="media-heading">{{room.level | uppercase}}</h2>
-                        <p style="font-size: 18px">{{room.price * 2}}RUB</p>
+                        <p style="font-size: 18px">{{room.price}}RUB</p>
                         <a href="#" data-toggle="modal" data-target="#bookingDetailsModal" class="btn btn-danger">Book</a>
                     </div>
                 </li>
             </ul>
-        </form>
-        
+        </form> 
     </div>
+
     <!-- modal checking booking details -->
     <div id="bookingDetailsModal" class="modal fade" role="dialog" ng-controller="CurrentHotelCtrl">
         <div class="modal-dialog">
@@ -190,24 +153,20 @@
                 </div>
                 <div class="modal-body">
                     <dl>
-                        <dt>Name:</dt>
-                        <dd><!-- {{from form input.name}}--></dd>
-                        <dt>Email:</dt>
-                        <dd><!-- {{from form input.email}}--></dd>
                         <dt>Hotel:</dt>
                         <dd>{{currentHotel.name}}</dd>
                         <dt>Arrival Date:</dt>
-                        <dd><!-- {{from form input.email}}--></dd>
+                        <dd>18-11-2016</dd>
                         <dt>Departure Date:</dt>
-                        <dd><!-- {{from form input.email}}--></dd>
+                        <dd>20-11-2016</dd>
                         <dt>Room:</dt>
-                        <dd>{{room.level | uppercase}}</dd>
+                        <dd>SINGLE</dd>
                         <dt>Price:</dt>
-                        <dd>{{room.price}}</dd>
+                        <dd>2000</dd>
                     </dl>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-success">Submit</button>
+                    <a href="booking.html"><button type="button" class="btn btn-success">Submit</button></a>
                     <button type="button" class="btn btn-default"
                        data-dismiss="modal">Cancel</button>
                 </div>

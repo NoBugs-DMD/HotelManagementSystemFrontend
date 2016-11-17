@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="hotelApp">
 
 <head>
     <meta charset="utf-8">
@@ -66,51 +66,55 @@
                     </ul>
                     <p></p> <!-- gap between the pill and the content VERY BAD-->
                     <div class="tab-content">
-                    <form role="form" id="loginTab" class="tab-pane fade in active">
+                    <form role="form" id="loginTab" class="tab-pane fade in active" ng-controller="HttpPostCtrl">
                     <div class="form-group">
-                        <label class="sr-only" for="email">Email address</label>
-                        <input type="email" class="form-control" id="email" placeholder="Email">
+                        <label class="sr-only" for="login">Login</label>
+                        <input type="login" class="form-control" ng-model="login" id="login" placeholder="Login" required>
                     </div>
                     <div class="form-group">
                         <label class="sr-only" for="password">Password</label>
-                        <input type="password" class="form-control" id="password" placeholder="Password">
+                        <input type="password" class="form-control" ng-model="password" id="password" placeholder="Password" required>
                     </div>
                     <div class="checkbox">
                         <label id="checkbox"> <input type="checkbox" >Remember me</label> 
                     </div>        
-                    <button type="submit" class="btn btn-info">Login</button>
+                    <button type="submit" class="btn btn-info" id="logIn" ng-click="LogIn()" data-dismiss="modal">Login</button>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default btn-sm"
                        data-dismiss="modal">Cancel</button>
                     </div>
                     </form>
                     <p></p> <!-- gap between the pill and the content VERY BAD-->
-                    <form role="form" id="signupTab" class="tab-pane fade">
+                    
+                    <!-- Sign Up Tab-->
+                    <div class="tab-pane fade" ng-controller="HttpPostCtrl" id="signupTab">
+                    <form role="form">
                     <div class="form-group">
                         <label class="sr-only" for="name">Login</label>
-                        <input type="login" class="form-control" id="login" placeholder="Login Name">
+                        <input type="login" class="form-control" id="login" ng-model="login" placeholder="Login Name" required/>
                     </div>
                     <div class="form-group">
                         <label class="sr-only" for="name">Name</label>
-                        <input type="name" class="form-control" id="name" placeholder="Name">
+                        <input type="name" class="form-control" id="name" ng-model="name" placeholder="Name" required/>
                     </div>
                     <div class="form-group">
                         <label class="sr-only" for="email">Email address</label>
-                        <input type="email" class="form-control" id="email" placeholder="Email">
+                        <input type="email" class="form-control" id="email" ng-model="email" placeholder="Email" required/>
                     </div>
                     <div class="form-group">
                         <label class="sr-only" for="password">Password</label>
-                        <input type="password" class="form-control" id="password" placeholder="Password">
+                        <input type="password" class="form-control" id="password" ng-model="password" placeholder="Password" required/>
                     </div>
                     <div class="checkbox">
                         <label id="checkbox"> <input type="checkbox" >Remember me</label> 
                     </div>        
-                    <button type="submit" class="btn btn-warning" >Sign Up</button>
+                    <button class="btn btn-warning" id="signUp" ng-click="SignUp()" type="submit">Sign Up</button>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default btn-sm"
                        data-dismiss="modal">Cancel</button>
                     </div>
                     </form>
+                    </div>
                     </div>
                     </div>
                  </div>
@@ -119,24 +123,24 @@
         <!-- Login modal ends -->
 
         <!-- Search form -->
-        <div class="container fullscreen">
+        <div class="container fullscreen" ng-controller="HttpPostCtrl">
             <div class="row row-content form-row">
                 <form role="form" style="padding-top: 20px">
                     <div class="form-group col-sm-3">
                         <label for="city">CITY</label></br>
-                        <input type="text" class="form-control typeahead" id="city" placeholder="Destination City">
+                        <input type="text" id="city" class="form-control typeahead" ng-model="city" placeholder="Destination City">
                     </div>
                     <div class="form-group col-sm-3">
                             <label for="fromDate">CHECK IN</label>
                             <div class="has-feedback">
-                            <input type="text" class="form-control" id="arrivalDate" name="date" aria-describedby="date" placeholder="Check In"><span class="glyphicon glyphicon-calendar form-control-feedback" aria-hidden="true"></span>
+                            <input type="text" class="form-control" ng-model="arrivalDate" id="arrivalDate" name="date" aria-describedby="date" placeholder="Check In"><span class="glyphicon glyphicon-calendar form-control-feedback" aria-hidden="true"></span>
                             <span id="date" class="sr-only">date-field</span>
                             </div>
                     </div>
                     <div class="form-group col-sm-3">
                         <label for="untilDate">CHECK OUT</label>
                         <div class="has-feedback">
-                            <input type="text" class="form-control" id="departureDate" name="date" aria-describedby="date" placeholder="Check Out"><span class="glyphicon glyphicon-calendar form-control-feedback" aria-hidden="true"></span>
+                            <input type="text" class="form-control" ng-model="departureDate" id="departureDate" name="date" aria-describedby="date" placeholder="Check Out"><span class="glyphicon glyphicon-calendar form-control-feedback" aria-hidden="true"></span>
                             <span id="date" class="sr-only">date-field</span>
                         </div>
                     </div>
@@ -152,7 +156,7 @@
                         </select>
                     </div>
                     <div class="form-group col-sm-1" style="padding-top:25px">
-                        <a href="searchResults.html" type="submit" class="btn btn-danger" id="search"><span class="glyphicon glyphicon-search"></span></a>
+                        <a href="searchResults.html" type="submit" class="btn btn-danger" ng-click="GetSearch()" id="search"><span class="glyphicon glyphicon-search"></span></a>
                     </div>
                 </form>
             </div>
@@ -194,11 +198,10 @@
         });
     </script>
     <!-- script for typeahead.js -->
-    <script type="text/javascript">
+    <script>
         $(document).ready(function(){
-        // Defining the local dataset
         var cities = ['Paris', 'London', 'Moscow', 'Kazan', 'Innopolis', 'Athens', 'Madrid', 'Barcelona', 'Saint Petersburg', 'Oslo', 'Tokyo', 'Warsaw', 'Berlin', 'Amsterdam'];
-    
+
         // Constructing the suggestion engine
         var cities = new Bloodhound({
             datumTokenizer: Bloodhound.tokenizers.whitespace,
@@ -214,9 +217,18 @@
         },
         {
             name: 'cities',
-            source: cities
+            source: cities,
         });
     });  
+    </script>
+    <!-- closing the modal -->
+    <script>
+        $('#logIn').click(function() {
+            $('#loginModal').modal('hide');
+        });
+        $('#signUp').click(function() {
+            $('#loginModal').modal('hide');
+        });
     </script>
     
     

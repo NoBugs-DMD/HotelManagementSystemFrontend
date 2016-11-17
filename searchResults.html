@@ -119,60 +119,29 @@
         <!-- Login modal ends -->
 
         <!-- main container starts -->
-        <div class="container-fluid" style="padding-top: 40px" ng-controller="PaginationCtrl">
-        <!-- Form -->
-        <form role="form" style="padding-top: 20px">
-            <div class="form-group col-sm-4">
-                <label for="city">CITY</label></br>
-                <input type="text" class="form-control typeahead" id="city" placeholder="Destination City">
-            </div>
-            <div class="form-group col-sm-3">
-                <label for="fromDate">CHECK IN</label>
-                <div class="has-feedback">
-                    <input type="text" class="form-control" id="arrivalDate" name="date" aria-describedby="date" placeholder="Check In"><span class="glyphicon glyphicon-calendar form-control-feedback" aria-hidden="true"></span>
-                    <span id="date" class="sr-only">date-field</span>
-                </div>
-            </div>
-            <div class="form-group col-sm-3">
-                <label for="untilDate">CHECK OUT</label>
-                <div class="has-feedback">
-                    <input type="text" class="form-control" id="departureDate" name="date" aria-describedby="date" placeholder="Check Out"><span class="glyphicon glyphicon-calendar form-control-feedback" aria-hidden="true"></span>
-                    <span id="date" class="sr-only">date-field</span>
-                </div>
-            </div>
-            <div class="form-group col-sm-2" style="padding-top:25px">
-                <button type="submit" class="btn btn-danger" id="search"><span class="glyphicon glyphicon-search"></span></button>
-            </div>
-        </form>
-        <!-- End of Form -->
+        <div class="container-fluid" style="padding-top: 60px" ng-controller="PaginationCtrl">
         
-        <!-- Sorting starts -->
-        <div class="row row-content">
-            <p id="sortedP"> Sort by: <a href="#price">price</a> &nbsp; <a href="#rating">rating</a> &nbsp; <a href="#stars">stars</a></p>
-        </div>
-        <!-- Sorting ends -->
-
         <!-- Search results -->
-        <div class="row">
-               <ul class="media-list">
-                <li class="col-sm-4 media" ng-repeat="hotel in pagedHotels">
-                    <div class="media-left media-middle">
-                        <a href="#">
+    <div class="row">
+        <ul class="media-list">
+            <li class="col-sm-4 media" ng-repeat="hotel in pagedHotels">
+                <div class="media-left media-middle">
+                    <a href="#">
                         <img class="media-object img-thumbnail" style="width:150px;height:150px"
-                         ng-src={{hotel.image}}>
-                        </a>
-                    </div>
-                    <div class="media-body">
-                        <h2 class="media-heading"><a href="hotel.html">{{hotel.name}}</a></h2>
+                        ng-src={{hotel.image}}>
+                    </a>
+                </div>
+                <div class="media-body" ng-controller="HttpPostCtrl">
+                    <h2 class="media-heading"><a href="hotel.html">{{hotel.name}}</a></h2>
                         <h4><span class="label label-warning">{{hotel.stars}}</span>
-                        <span class="badge">{{hotel.rating}}</span></h4>
-                        <p style="font-size: 18px">From {{hotel.price}}RUB</p>
-                        <a href="makeabooking.html" class="btn btn-danger">Book</a>
-                    </div>
-                </li>
-                <div class="col-sm-4 col-sm-push-5"><button class="btn btn-info" href="#" ng-class="nextPageDisabledClass()" ng-click="loadMore()" id="getMoreBtn">Get More Hotels</button></div>
-                </ul>
-        </div> <!-- Search results end -->
+                            <span class="badge">{{hotel.rating}}</span></h4>
+                            <p style="font-size: 18px">From {{hotel.price}}RUB</p>
+                            <a href="makeabooking.html" ng-click="GetHotel({{hotel.id}})" class="btn btn-danger">Book</a>
+                </div>
+            </li>
+            <div class="col-sm-4 col-sm-push-5"><button class="btn btn-info" href="#" ng-class="nextPageDisabledClass()" ng-click="loadMore()" id="getMoreBtn">Get More Hotels</button></div>
+        </ul>
+    </div> <!-- Search results end -->
     </div> <!-- main container ends -->
     
     <!-- footer starts-->
@@ -235,39 +204,7 @@
             });
         });
     </script>
-    
-    <!-- date pickers -->
-    <script type="text/javascript">
-        $(function () {
-                $('#arrivalDate').datepicker();
-                $('#departureDate').datepicker();
-        });
-    </script>
-    <!-- script for typeahead.js -->
-    <script type="text/javascript">
-        $(document).ready(function(){
-        // Defining the local dataset
-        var cities = ['Paris', 'London', 'Moscow', 'Kazan', 'Innopolis', 'Athens', 'Madrid', 'Barcelona', 'Saint Petersburg', 'Oslo', 'Tokyo', 'Warsaw', 'Berlin', 'Amsterdam'];
-    
-        // Constructing the suggestion engine
-        var cities = new Bloodhound({
-            datumTokenizer: Bloodhound.tokenizers.whitespace,
-            queryTokenizer: Bloodhound.tokenizers.whitespace,
-            local: cities
-        });
-    
-        // Initializing the typeahead
-        $('.typeahead').typeahead({
-            hint: true,
-            highlight: true, /* Enable substring highlighting */
-            minLength: 1 /* Specify minimum characters required for showing suggestions */
-        },
-        {
-            name: 'cities',
-            source: cities
-        });
-    });  
-    </script>
+
     
     
 </body>

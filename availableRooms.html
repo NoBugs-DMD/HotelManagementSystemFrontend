@@ -35,3 +35,239 @@
         </div>
         
     </div>
+
+    app.controller('HttpPostCtrl', function($scope, $http) {
+    
+    var api = "http://89.223.20.123:8080/api/";
+    
+    $scope.LogIn = function() {
+        var data = {
+            Login: $scope.login,
+            PassHash: $scope.password
+        };
+
+        $http.post(api + "signin/", data)
+            .success(function(data,status) {
+                roles = data;
+                
+            })
+            .error(function(data, status) {
+                $scope.ResponseDetails = "Oops! Error."
+            })
+    };
+
+    $scope.getRoles = function() {
+        return roles;
+    };
+    
+    //sign up at index
+    $scope.SignUp = function() {
+        var data = {
+            Login: $scope.login,
+            Name: $scope.name,
+            Email: $scope.email,
+            PassHash: $scope.password
+        };
+
+        $http.post(api + "signup/", data)
+            .success(function(data,status) {
+                $scope.PostDataResponse = "You've signed up!";
+            })
+            .error(function(data, status) {
+                $scope.ResponseDetails = "Oops! Error."
+            })
+    };
+
+    //search hotel results from index to searchResults
+    $scope.GetSearch = function() {
+        var data = {
+            CityId: 0,
+            arrival_time: $scope.arrivalDate,
+            departure_time: $scope.departureDate
+        };
+
+        $http.post("http://89.223.20.123:8080/api/signup/", data)
+            .success(function(data, status) {
+                currentDataObj = data;
+                console.log("Time to Travel - Time Travel");
+            })
+            .error(function(data, status) {
+                console.log("Your search is invalid");
+            })
+    };
+
+    $scope.GetAllCities = function() {
+        $http.get(api + "city/")
+            .success(function(data,status) {
+                console.log(data);
+            })
+            .error(function(data, status) {
+                console.log(data);
+            })
+    };
+
+    $scope.AddCity = function() {
+        var data = {
+            Name: "foo" 
+        };
+
+        $http.put(api + "city/", data)
+            .success(function(data,status) {
+                console.log(data);
+            })
+            .error(function(data, status) {
+                console.log(data);
+            })
+    };
+
+    $scope.GetMyBookings = function() {
+        var n = 5;
+        var ofst = 0;
+
+        $http.get(api + "account/bookings/" + n + "?offset=" + ofst)
+            .success(function(data,status) {
+                console.log(data);
+            })
+            .error(function(data, status) {
+                console.log(data);
+            })
+    };
+
+    $scope.GetMyInfo = function() {
+        $http.get(api + "account/")
+            .success(function(data,status) {
+                console.log(data);
+            })
+            .error(function(data, status) {
+                console.log(data);
+            })
+    };
+
+    $scope.UpdateMyInfo = function() {
+        // All fields are optional
+        var data = {
+            NewName: "foo",
+            NewEmail: "foo",
+            OldPassHash: "foo",
+            NewPassHash: "foo"
+        };
+
+        $http.post(api + "account/", data)
+            .success(function(data,status) {
+                console.log(data);
+            })
+            .error(function(data, status) {
+                console.log(data);
+            })
+    };
+
+    $scope.GetBooking = function() {
+        var id = 0;
+
+        $http.get(api + "booking/" + id)
+            .success(function(data,status) {
+                console.log(data);
+            })
+            .error(function(data, status) {
+                console.log(data);
+            })
+    };
+
+    $scope.AddBooking = function() {
+        var data = {
+            ClientPersonID: $scope.id,
+            HotelID: $scope.data.id,
+            RoomNumber: 0,
+            ArrivalTime: $scope.arrivalDate,
+            DepartureTime: $scope.departureDate
+        };
+
+        $http.put(api + "booking/", data)
+            .success(function(data,status) {
+                console.log(data);
+            })
+            .error(function(data, status) {
+                console.log(data);
+            })
+    };
+
+    $scope.GetHotels = function() {
+        var n = 5;
+        var ofst = 0;
+
+        $http.get(api + "hotels/" + n + "?offset=" + ofst)
+            .success(function(data,status) {
+                console.log(data);
+            })
+            .error(function(data, status) {
+                console.log(data);
+            })
+    }
+
+    $scope.GetHotel = function(id) {
+
+        $http.get(api + "hotel/" + id)
+            .success(function(data,status) {
+                console.log(data);
+            })
+            .error(function(data, status) {
+                console.log(data);
+            })
+    }
+
+    $scope.AddHotel = function() {
+        var data = {
+            CityID: 0,
+            Name: "foo",
+            Description: "foo",
+            Stars: 5 
+        };
+
+        $http.put(api + "hotel/", data)
+            .success(function(data,status) {
+                console.log(data);
+            })
+            .error(function(data, status) {
+                console.log(data);
+            })
+    };
+
+    $scope.UpdateHotel = function() {
+        var id = 0;
+
+        // All fields are optional
+        var data = {
+            RuleSetID: 0,
+            Name: "foo",
+            Description: "foo",
+            PhotoSetID: 0,
+            Stars: 5
+        };
+
+        $http.post(api + "hotel/" + id, data)
+            .success(function(data,status) {
+                console.log(data);
+            })
+            .error(function(data, status) {
+                console.log(data);
+            })
+    };
+
+    $scope.GetRooms = function(id) {
+        var rooms = [];
+        $http.get(api + "hotel/:" + id +"/rooms/:cnt") //?? what do you mean by count
+            .success(function(data, status) {
+                rooms = data;
+                console.log(data);
+            })
+            .error(function(data, status) {
+                console.log(data);
+            });
+
+    };
+
+});
+
+
+
+
